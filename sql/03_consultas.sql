@@ -216,20 +216,31 @@ SELECT
     os.id_os,
     p_cli.nome AS cliente,
     os.status,
-    COALESCE(SUM(ps.quantidade * ps.preco_praticado), 0) AS total_servicos,
-    COALESCE(SUM(up.quantidade * up.preco_praticado), 0) AS total_pecas,
-    COALESCE(SUM(up.quantidade * pe.preco_custo), 0) AS custo_pecas,
-    (COALESCE(SUM(up.quantidade * up.preco_praticado), 0) - COALESCE(SUM(up.quantidade * pe.preco_custo), 0)) AS lucro_bruto_pecas,
+    COALESCE(s_tot.total_servicos, 0) AS total_servicos,
+    COALESCE(pec_tot.total_pecas, 0) AS total_pecas,
+    COALESCE(pec_tot.custo_pecas, 0) AS custo_pecas,
+    COALESCE(pec_tot.lucro_bruto_pecas, 0) AS lucro_bruto_pecas,
     v.valor_total AS valor_total_os
 FROM ORDEM_SERVICO os
 INNER JOIN CLIENTE c ON os.id_cliente = c.id_cliente
 INNER JOIN PESSOA p_cli ON c.id_pessoa = p_cli.id_pessoa
 INNER JOIN vw_os_valor_total v ON os.id_os = v.id_os
-LEFT JOIN POSSUI_SERVICO ps ON os.id_os = ps.id_os
-LEFT JOIN UTILIZA_PECA up ON os.id_os = up.id_os
-LEFT JOIN PECA pe ON up.id_peca = pe.id_peca
+LEFT JOIN (
+    SELECT id_os, SUM(quantidade * preco_praticado) AS total_servicos
+    FROM POSSUI_SERVICO
+    GROUP BY id_os
+) s_tot ON os.id_os = s_tot.id_os
+LEFT JOIN (
+    SELECT 
+        up.id_os, 
+        SUM(up.quantidade * up.preco_praticado) AS total_pecas,
+        SUM(up.quantidade * pe.preco_custo) AS custo_pecas,
+        SUM(up.quantidade * up.preco_praticado) - SUM(up.quantidade * pe.preco_custo) AS lucro_bruto_pecas
+    FROM UTILIZA_PECA up
+    INNER JOIN PECA pe ON up.id_peca = pe.id_peca
+    GROUP BY up.id_os
+) pec_tot ON os.id_os = pec_tot.id_os
 WHERE os.status IN ('Concluido', 'Entregue')
-GROUP BY os.id_os, p_cli.nome, os.status, v.valor_total
 ORDER BY valor_total_os DESC;
 
 -- ------------------------------------------------------------
@@ -270,7 +281,7 @@ SELECT
     pe.qtd_estoque,
     pe.qtd_minima,
     (pe.qtd_minima - pe.qtd_estoque) AS necessidade_reposicao,
-    COUNT(up.id_os) AS qtd_os_em_andamento_usando
+    COUNT(DISTINCT up.id_os) AS qtd_os_em_andamento_usando
 FROM PECA pe
 INNER JOIN UTILIZA_PECA up ON pe.id_peca = up.id_peca
 INNER JOIN ORDEM_SERVICO os ON up.id_os = os.id_os

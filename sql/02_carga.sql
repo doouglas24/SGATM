@@ -2,11 +2,11 @@
 -- ARTEFATO A7: SCRIPT DE CARGA DE DADOS (DML - SGATM)
 -- Sistema de Gestão de Assistência Técnica e Manutenção
 -- SGBD: MySQL 8.0
-
+--
 -- Descrição: Povoamento inicial com dados realistas, casos de
 -- contorno propositais (campos NULL opcionais, OSs em aberto,
 -- históricos múltiplos por OS) e estrita observância das regras
--- de negócio e triggers implementadas no script DDL (01_ddl.sql).
+-- de negócio e triggers implementadas no script DDL.
 -- ============================================================
 
 USE sgatm_db;
@@ -30,25 +30,23 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- ============================================================
 -- 1. POVOAMENTO DA TABELA PESSOA (50 registros)
 -- ============================================================
--- Pessoas 1 a 10: Funcionários (Gerentes, Atendentes, Técnicos)
--- Pessoas 11 a 50: Clientes
 INSERT INTO PESSOA (id_pessoa, cpf, nome, email, telefone) VALUES
 -- Funcionários (1-10)
 (1, '111.222.333-01', 'Carlos Eduardo Lima', 'carlos.lima@sgatm.com.br', '(61) 98111-0001'),
 (2, '111.222.333-02', 'Ana Paula Ribeiro', 'ana.ribeiro@sgatm.com.br', '(61) 98111-0002'),
 (3, '111.222.333-03', 'Marcos Vinicius Souza', 'marcos.souza@sgatm.com.br', '(61) 98111-0003'),
 (4, '111.222.333-04', 'Juliana Mendes Rocha', 'juliana.rocha@sgatm.com.br', '(61) 98111-0004'),
-(5, '111.222.333-05', 'Roberto Fonseca Barbosa', 'roberto.barbosa@sgatm.com.br', NULL), -- Contorno: sem telefone
+(5, '111.222.333-05', 'Roberto Fonseca Barbosa', 'roberto.barbosa@sgatm.com.br', NULL),
 (6, '111.222.333-06', 'Fernando Castro Alves', 'fernando.alves@sgatm.com.br', '(61) 98111-0006'),
 (7, '111.222.333-07', 'Lucas Prado Martins', 'lucas.martins@sgatm.com.br', '(61) 98111-0007'),
 (8, '111.222.333-08', 'Beatriz Oliveira Santos', 'beatriz.santos@sgatm.com.br', '(61) 98111-0008'),
 (9, '111.222.333-09', 'Diego Ferreira Ramos', 'diego.ramos@sgatm.com.br', '(61) 98111-0009'),
-(10, '111.222.333-10', 'Patricia Gomez Silva', 'patricia.silva@sgatm.com.br', NULL), -- Contorno: sem telefone
+(10, '111.222.333-10', 'Patricia Gomez Silva', 'patricia.silva@sgatm.com.br', NULL),
 -- Clientes (11-50)
 (11, '222.333.444-11', 'Adriana Maria Guimaraes', 'adriana.guimaraes@gmail.com', '(61) 99222-0011'),
 (12, '222.333.444-12', 'Bruno Henrique Costa', 'bruno.costa@hotmail.com', '(61) 99222-0012'),
 (13, '222.333.444-13', 'Camila Xavier Pires', 'camila.pires@yahoo.com.br', '(61) 99222-0013'),
-(14, '222.333.444-14', 'Daniel Nogueira Faria', 'daniel.faria@outlook.com', NULL), -- Contorno: sem telefone
+(14, '222.333.444-14', 'Daniel Nogueira Faria', 'daniel.faria@outlook.com', NULL),
 (15, '222.333.444-15', 'Eduardo Augusto Monteiro', 'eduardo.monteiro@gmail.com', '(61) 99222-0015'),
 (16, '222.333.444-16', 'Fernanda Lopes Viana', 'fernanda.viana@gmail.com', '(61) 99222-0016'),
 (17, '222.333.444-17', 'Gabriel Vasconcelos', 'gabriel.vasc@gmail.com', '(61) 99222-0017'),
@@ -89,9 +87,8 @@ INSERT INTO PESSOA (id_pessoa, cpf, nome, email, telefone) VALUES
 -- ============================================================
 -- 2. POVOAMENTO DA TABELA CLIENTE (40 registros)
 -- ============================================================
--- Associa pessoas id 11 a 50 como clientes
 INSERT INTO CLIENTE (id_cliente, data_cadastro, id_pessoa) VALUES
-(1, '2222-01-15', 11), (2, '2022-02-10', 12), (3, '2022-03-05', 13), (4, '2022-03-20', 14),
+(1, '2022-01-15', 11), (2, '2022-02-10', 12), (3, '2022-03-05', 13), (4, '2022-03-20', 14),
 (5, '2022-04-12', 15), (6, '2022-05-18', 16), (7, '2022-06-01', 17), (8, '2022-07-22', 18),
 (9, '2022-08-30', 19), (10, '2022-09-14', 20), (11, '2022-10-05', 21), (12, '2022-11-19', 22),
 (13, '2022-12-01', 23), (14, '2023-01-10', 24), (15, '2023-02-14', 25), (16, '2023-03-22', 26),
@@ -102,13 +99,9 @@ INSERT INTO CLIENTE (id_cliente, data_cadastro, id_pessoa) VALUES
 (33, '2024-06-05', 43), (34, '2024-06-25', 44), (35, '2024-07-01', 45), (36, '2024-07-15', 46),
 (37, '2024-08-02', 47), (38, '2024-08-10', 48), (39, '2024-08-20', 49), (40, '2024-08-25', 50);
 
--- CORRIGIDO: Ajuste pontual da data de cadastro com valor de ano invalido
-UPDATE CLIENTE SET data_cadastro = '2022-01-15' WHERE id_cliente = 1;
-
 -- ============================================================
 -- 3. POVOAMENTO DA TABELA FUNCIONARIO (10 registros)
 -- ============================================================
--- Cumpre RN04: Técnicos obrigatoriamente possuem um Gerente supervisor associado
 INSERT INTO FUNCIONARIO (id_funcionario, cargo, data_admissao, salario_base, id_gerente, id_pessoa) VALUES
 -- Gerentes (id_gerente NULL)
 (1, 'Gerente', '2020-01-15', 8500.00, NULL, 1),
@@ -117,7 +110,7 @@ INSERT INTO FUNCIONARIO (id_funcionario, cargo, data_admissao, salario_base, id_
 (3, 'Atendente', '2022-05-01', 3200.00, 1, 3),
 (4, 'Atendente', '2022-08-15', 3100.00, 1, 4),
 (5, 'Atendente', '2023-02-01', 3000.00, 2, 5),
--- Técnicos (obrigatório id_gerente conforme RN04)
+-- Técnicos (obrigatório id_gerente)
 (6, 'Tecnico', '2021-06-01', 4800.00, 1, 6),
 (7, 'Tecnico', '2021-11-20', 4600.00, 1, 7),
 (8, 'Tecnico', '2022-02-10', 4500.00, 2, 8),
@@ -127,12 +120,11 @@ INSERT INTO FUNCIONARIO (id_funcionario, cargo, data_admissao, salario_base, id_
 -- ============================================================
 -- 4. POVOAMENTO DA TABELA EQUIPAMENTO (45 registros)
 -- ============================================================
--- Cumpre RN06: numero_serie é opcional (pode ser NULL)
 INSERT INTO EQUIPAMENTO (id_equipamento, tipo_aparelho, marca, modelo, numero_serie, id_cliente) VALUES
 (1, 'Notebook', 'Dell', 'Inspiron 15 3000', 'SN-DELL-00192', 1),
 (2, 'Smartphone', 'Apple', 'iPhone 11 64GB', 'SN-AAPL-99182', 1),
-(3, 'Notebook', 'Lenovo', 'IdeaPad 3', NULL, 2), -- Contorno: sem numero de serie
-(4, 'Desktop', 'Custom', 'Core i7 10700K', NULL, 3), -- Contorno: sem numero de serie
+(3, 'Notebook', 'Lenovo', 'IdeaPad 3', NULL, 2), 
+(4, 'Desktop', 'Custom', 'Core i7 10700K', NULL, 3), 
 (5, 'Smartphone', 'Samsung', 'Galaxy S21', 'SN-SAMS-44821', 4),
 (6, 'Tablet', 'Apple', 'iPad Air 4', 'SN-AAPL-33211', 5),
 (7, 'Notebook', 'Acer', 'Nitro 5', 'SN-ACER-88123', 6),
@@ -170,15 +162,14 @@ INSERT INTO EQUIPAMENTO (id_equipamento, tipo_aparelho, marca, modelo, numero_se
 (39, 'Console', 'Microsoft', 'Xbox Series S', 'SN-MSFT-10923', 38),
 (40, 'Smartphone', 'Samsung', 'Galaxy Z Flip 4', 'SN-SAMS-99012', 39),
 (41, 'Notebook', 'Apple', 'MacBook Pro 13', 'SN-AAPL-44129', 40),
-(42, 'Smartphone', 'Apple', 'iPhone XR', NULL, 1), -- Segundo equipamento do cliente 1
-(43, 'Notebook', 'Lenovo', 'IdeaPad Gaming 3', 'SN-LENV-10293', 5), -- Segundo equipamento do cliente 5
-(44, 'Desktop', 'Custom', 'Ryzen 7 5700X', NULL, 10), -- Segundo equipamento do cliente 10
-(45, 'Smartphone', 'Samsung', 'Galaxy A32', 'SN-SAMS-55192', 15); -- Segundo equipamento do cliente 15
+(42, 'Smartphone', 'Apple', 'iPhone XR', NULL, 1), 
+(43, 'Notebook', 'Lenovo', 'IdeaPad Gaming 3', 'SN-LENV-10293', 5), 
+(44, 'Desktop', 'Custom', 'Ryzen 7 5700X', NULL, 10), 
+(45, 'Smartphone', 'Samsung', 'Galaxy A32', 'SN-SAMS-55192', 15);
 
 -- ============================================================
 -- 5. POVOAMENTO DA TABELA SERVICO_CATALOGO (10 registros)
 -- ============================================================
--- Cumpre RN14: preco_base > 0 e tempo_estimado_min > 0
 INSERT INTO SERVICO_CATALOGO (id_servico, nome_servico, preco_base, tempo_estimado_min) VALUES
 (1, 'Formatacao e Reinstalacao de Sistema Operacional', 150.00, 120),
 (2, 'Troca de Tela de Notebook ou Smartphone', 200.00, 90),
@@ -194,9 +185,6 @@ INSERT INTO SERVICO_CATALOGO (id_servico, nome_servico, preco_base, tempo_estima
 -- ============================================================
 -- 6. POVOAMENTO DA TABELA PECA (12 registros)
 -- ============================================================
--- Cumpre RN16: preços e estoques >= 0
--- OBS: Estoque inicial mantido com bom volume para suportar os abatimentos
--- automáticos executados pela trigger trg_utiliza_peca_rn18_rn19.
 INSERT INTO PECA (id_peca, descricao_peca, preco_custo, preco_venda, qtd_estoque, qtd_minima) VALUES
 (1, 'SSD NVMe M.2 512GB Kingston', 180.00, 320.00, 60, 5),
 (2, 'Memoria RAM DDR4 8GB 3200MHz Notebook', 110.00, 210.00, 50, 5),
@@ -214,13 +202,9 @@ INSERT INTO PECA (id_peca, descricao_peca, preco_custo, preco_venda, qtd_estoque
 -- ============================================================
 -- 7. POVOAMENTO DA TABELA ORDEM_SERVICO (42 registros)
 -- ============================================================
--- Cumpre RN07, RN08, RN09, RN10, RN11:
--- id_atendente em (3, 4, 5) [Atendentes]
--- id_tecnico em (6, 7, 8, 9, 10) [Técnicos] ou NULL se Aberto
--- status Concluido/Entregue contêm obrigatoriamente diagnostico_tecnico
 INSERT INTO ORDEM_SERVICO
 (id_os, id_atendente, id_tecnico, id_cliente, id_equipamento, data_abertura, data_prevista, defeito_relatado, diagnostico_tecnico, status) VALUES
--- OS 1 a 10: Entregues (Ciclo Completo)
+-- Entregues (1-10)
 (1, 3, 6, 1, 1, '2024-05-01 09:00:00', '2024-05-03', 'Notebook esquentando muito e desligando sozinho.', 'Acúmulo de poeira e pasta térmica ressecada. Realizada limpeza interna e troca de pasta térmica.', 'Entregue'),
 (2, 4, 7, 1, 2, '2024-05-02 10:30:00', '2024-05-04', 'Tela quebrada apos queda de altura.', 'Display trincado. Realizada a substituição do módulo da tela.', 'Entregue'),
 (3, 5, 8, 2, 3, '2024-05-05 11:15:00', '2024-05-07', 'Lentidão extrema ao iniciar o sistema.', 'HD com setores defeituosos. Recomendado e instalado SSD 512GB com clone do SO.', 'Entregue'),
@@ -231,8 +215,7 @@ INSERT INTO ORDEM_SERVICO
 (8, 4, 8, 7, 8, '2024-05-18 15:30:00', '2024-05-21', 'PS5 liga e desliga em seguida (LOD).', 'Curto na linha primária da fonte interna. Reparo de placa e substituição de capacitores.', 'Entregue'),
 (9, 5, 9, 8, 9, '2024-05-20 09:50:00', '2024-05-22', 'Aparelho caiu na água e parou de dar imagem.', 'Oxidação moderada na placa principal. Realizado banho ultrassônico e desoxidação.', 'Entregue'),
 (10, 3, 10, 9, 10, '2024-05-22 11:00:00', '2024-05-25', 'Teclas falhando e SO lento.', 'Teclado danificado e sistema corrompido. Reinstalação limpa do Windows efetuada.', 'Entregue'),
-
--- OS 11 a 20: Concluídas (Prontas para retirada)
+-- Concluidas (11-20)
 (11, 4, 6, 10, 11, '2024-06-01 10:00:00', '2024-06-03', 'Computador bipando ao ligar.', 'Pente de memória RAM com defeito. Substituição por módulo DDR4 16GB.', 'Concluido'),
 (12, 5, 7, 11, 12, '2024-06-03 14:15:00', '2024-06-05', 'Bateria estufada pressionando a tela.', 'Bateria estufada com risco. Removida e instalada nova bateria original.', 'Concluido'),
 (13, 3, 8, 12, 13, '2024-06-05 09:30:00', '2024-06-08', 'Sem som nos alto-falantes e notebook lento.', 'Driver corrompido e necessidade de upgrade de RAM. Adicionado pente de 8GB DDR4.', 'Concluido'),
@@ -243,8 +226,7 @@ INSERT INTO ORDEM_SERVICO
 (18, 5, 8, 17, 18, '2024-06-18 08:30:00', '2024-06-20', 'PC liga mas não dá vídeo.', 'BIOS corrompida. Efetuada a regravação da BIOS via gravador epron externo.', 'Concluido'),
 (19, 3, 9, 18, 19, '2024-06-20 10:40:00', '2024-06-22', 'Tela piscando ao mover a dobradiça.', 'Cabo flat do display danificado. Troca do cabo flat por peça nova.', 'Concluido'),
 (20, 4, 10, 19, 20, '2024-06-22 14:00:00', '2024-06-24', 'Aparelho travado na tela da logo.', 'Loop infinito no firmware. Reflash de firmware efetuado com sucesso.', 'Concluido'),
-
--- OS 21 a 28: Em Execução
+-- Em Execução (21-28)
 (21, 5, 6, 20, 21, '2024-07-01 09:10:00', '2024-07-05', 'Gargalo em multitarefas e travamentos.', 'Necessidade de limpeza física e upgrade de SSD NVMe.', 'Em Execucao'),
 (22, 3, 7, 21, 22, '2024-07-02 11:30:00', '2024-07-04', 'Analogico esquerdo com drift severo.', 'Análise confirma desgaste no trimpot do analógico. Em processo de soldagem de novo componente.', 'Em Execucao'),
 (23, 4, 8, 22, 23, '2024-07-03 14:00:00', '2024-07-06', 'Vidro traseiro e bateria precisando de troca.', 'Troca de bateria autorizada. Em execução pelo técnico.', 'Em Execucao'),
@@ -253,83 +235,52 @@ INSERT INTO ORDEM_SERVICO
 (26, 4, 6, 25, 26, '2024-07-06 10:20:00', '2024-07-09', 'Aparelho não segura carga.', 'Verificada necessidade de substituição de bateria. Reparo em progresso.', 'Em Execucao'),
 (27, 5, 7, 26, 27, '2024-07-08 13:40:00', '2024-07-11', 'Tela com linhas verticais coloridas.', 'Falha no painel LED. Instalação de nova tela 15.6 slim em andamento.', 'Em Execucao'),
 (28, 3, 8, 27, 28, '2024-07-09 15:00:00', '2024-07-12', 'Sem acesso à rede Wi-Fi e bateria fraca.', 'Substituição da placa de rede interna e bateria.', 'Em Execucao'),
-
--- OS 29 a 33: Aguardando Peça
+-- Aguardando Peça (29-33)
 (29, 4, 9, 28, 29, '2024-07-10 09:00:00', '2024-07-20', 'Leitor de disco não ejeta nem lê jogos.', 'Engrenagem do drive óptico quebrada. Peça encomendada junto ao fornecedor.', 'Aguardando Peca'),
 (30, 5, 10, 29, 30, '2024-07-11 11:10:00', '2024-07-22', 'Tela dobrável piscando e falhando toque.', 'Display Z Flip danificado. Aguardando entrega de módulo oficial.', 'Aguardando Peca'),
 (31, 3, 6, 30, 31, '2024-07-12 14:30:00', '2024-07-25', 'Placa mãe sem alimentação no circuito de entrada.', 'MOSFETs da linha primária queimados. Aguardando chegada dos componentes SMD.', 'Aguardando Peca'),
 (32, 4, 7, 31, 32, '2024-07-13 16:00:00', '2024-07-23', 'Placa de vídeo não reconhece no Windows.', 'Chip gráfico necessita de reballing/substituição do chip. Peça em trânsito.', 'Aguardando Peca'),
 (33, 5, 8, 32, 33, '2024-07-15 08:30:00', '2024-07-24', 'Câmera traseira trincada e sem foco.', 'Módulo de câmera danificado. Aguardando fornecedor.', 'Aguardando Peca'),
-
--- OS 34 a 38: Em Diagnóstico
+-- Em Diagnóstico (34-38)
 (34, 3, 9, 33, 34, '2024-07-16 10:00:00', '2024-07-19', 'Lentidão e desligamento sem motivo aparente.', 'Em análise bancada para verificar temperaturas e memória.', 'Em Diagnostico'),
 (35, 4, 10, 34, 35, '2024-07-17 12:00:00', '2024-07-20', 'Não conecta no Wi-Fi e touch falha.', 'Técnico efetuando testes de continuidade na placa.', 'Em Diagnostico'),
 (36, 5, 6, 35, 36, '2024-07-18 14:20:00', '2024-07-21', 'Alto-falante com chiado forte.', 'Em diagnóstico de circuito de áudio.', 'Em Diagnostico'),
 (37, 3, 7, 36, 37, '2024-07-19 16:10:00', '2024-07-22', 'Teclado travando algumas letras.', 'Em avaliação para verificar se é sujeira ou falha física da membrana.', 'Em Diagnostico'),
 (38, 4, 8, 37, 38, '2024-07-20 09:40:00', NULL, 'Fonte fazendo barulho estranho de zumbido.', 'Análise de capacitores da fonte em andamento.', 'Em Diagnostico'),
-
--- OS 39 a 42: Aberto (Recém-criadas / Casos de contorno)
-(39, 5, NULL, 38, 39, '2024-07-21 11:00:00', NULL, 'Console liga mas fica na tela preta sem sinal HDMI.', NULL, 'Aberto'), -- Sem técnico e sem data prevista
-(40, 3, NULL, 39, 40, '2024-07-21 13:30:00', NULL, 'Aparelho desliga ao abrir a câmera.', NULL, 'Aberto'), -- Sem técnico e sem data prevista
+-- Aberto (39-42)
+(39, 5, NULL, 38, 39, '2024-07-21 11:00:00', NULL, 'Console liga mas fica na tela preta sem sinal HDMI.', NULL, 'Aberto'),
+(40, 3, NULL, 39, 40, '2024-07-21 13:30:00', NULL, 'Aparelho desliga ao abrir a câmera.', NULL, 'Aberto'),
 (41, 4, 9, 40, 41, '2024-07-22 08:15:00', '2024-07-25', 'Kernel panic constante no macOS.', NULL, 'Aberto'),
 (42, 5, NULL, 1, 42, '2024-07-22 10:00:00', NULL, 'Segunda entrada do cliente 1: iPhone XR não liga.', NULL, 'Aberto');
 
 -- ============================================================
 -- 8. POVOAMENTO DA TABELA HISTORICO_STATUS_OS (115 registros)
 -- ============================================================
--- Atende ao requisito do Item 4: "100 na tabela de maior movimento".
--- A PK é composta por (id_os, data_hora) conforme RN12.
 INSERT INTO HISTORICO_STATUS_OS (id_os, data_hora, status_novo, id_funcionario) VALUES
--- OS 1 (Entregue: 6 transições)
-(1, '2024-05-01 09:00:00', 'Aberto', 3),
-(1, '2024-05-01 10:30:00', 'Em Diagnostico', 6),
-(1, '2024-05-01 14:00:00', 'Aguardando Peca', 6),
-(1, '2024-05-02 09:15:00', 'Em Execucao', 6),
-(1, '2024-05-02 16:00:00', 'Concluido', 6),
-(1, '2024-05-03 11:00:00', 'Entregue', 3),
-
--- OS 2 (Entregue: 5 transições)
-(2, '2024-05-02 10:30:00', 'Aberto', 4),
-(2, '2024-05-02 11:45:00', 'Em Diagnostico', 7),
-(2, '2024-05-03 08:30:00', 'Em Execucao', 7),
-(2, '2024-05-03 17:00:00', 'Concluido', 7),
-(2, '2024-05-04 10:00:00', 'Entregue', 4),
-
--- OS 3 (Entregue: 5 transições)
-(3, '2024-05-05 11:15:00', 'Aberto', 5),
-(3, '2024-05-05 14:00:00', 'Em Diagnostico', 8),
-(3, '2024-05-06 09:00:00', 'Em Execucao', 8),
-(3, '2024-05-06 15:30:00', 'Concluido', 8),
-(3, '2024-05-07 14:20:00', 'Entregue', 5),
-
--- OS 4 (Entregue: 5 transições)
-(4, '2024-05-08 14:00:00', 'Aberto', 3),
-(4, '2024-05-08 16:30:00', 'Em Diagnostico', 9),
-(4, '2024-05-09 10:00:00', 'Em Execucao', 9),
-(4, '2024-05-09 17:15:00', 'Concluido', 9),
-(4, '2024-05-10 09:40:00', 'Entregue', 3),
-
--- OS 5 (Entregue: 5 transições)
-(5, '2024-05-10 16:20:00', 'Aberto', 4),
-(5, '2024-05-11 09:00:00', 'Em Diagnostico', 10),
-(5, '2024-05-11 11:30:00', 'Em Execucao', 10),
-(5, '2024-05-11 16:45:00', 'Concluido', 10),
-(5, '2024-05-12 10:15:00', 'Entregue', 4),
-
--- OS 6 (Entregue: 5 transições)
-(6, '2024-05-12 08:45:00', 'Aberto', 5),
-(6, '2024-05-12 10:00:00', 'Em Diagnostico', 6),
-(6, '2024-05-13 09:30:00', 'Em Execucao', 6),
-(6, '2024-05-13 14:00:00', 'Concluido', 6),
-(6, '2024-05-14 16:00:00', 'Entregue', 5),
-
--- OS 7 a 10 (Entregues: 4 transições cada = 16 registros)
+-- OS 1 (Entregue)
+(1, '2024-05-01 09:00:00', 'Aberto', 3), (1, '2024-05-01 10:30:00', 'Em Diagnostico', 6), (1, '2024-05-01 14:00:00', 'Aguardando Peca', 6),
+(1, '2024-05-02 09:15:00', 'Em Execucao', 6), (1, '2024-05-02 16:00:00', 'Concluido', 6), (1, '2024-05-03 11:00:00', 'Entregue', 3),
+-- OS 2 (Entregue)
+(2, '2024-05-02 10:30:00', 'Aberto', 4), (2, '2024-05-02 11:45:00', 'Em Diagnostico', 7), (2, '2024-05-03 08:30:00', 'Em Execucao', 7),
+(2, '2024-05-03 17:00:00', 'Concluido', 7), (2, '2024-05-04 10:00:00', 'Entregue', 4),
+-- OS 3 (Entregue)
+(3, '2024-05-05 11:15:00', 'Aberto', 5), (3, '2024-05-05 14:00:00', 'Em Diagnostico', 8), (3, '2024-05-06 09:00:00', 'Em Execucao', 8),
+(3, '2024-05-06 15:30:00', 'Concluido', 8), (3, '2024-05-07 14:20:00', 'Entregue', 5),
+-- OS 4 (Entregue)
+(4, '2024-05-08 14:00:00', 'Aberto', 3), (4, '2024-05-08 16:30:00', 'Em Diagnostico', 9), (4, '2024-05-09 10:00:00', 'Em Execucao', 9),
+(4, '2024-05-09 17:15:00', 'Concluido', 9), (4, '2024-05-10 09:40:00', 'Entregue', 3),
+-- OS 5 (Entregue)
+(5, '2024-05-10 16:20:00', 'Aberto', 4), (5, '2024-05-11 09:00:00', 'Em Diagnostico', 10), (5, '2024-05-11 11:30:00', 'Em Execucao', 10),
+(5, '2024-05-11 16:45:00', 'Concluido', 10), (5, '2024-05-12 10:15:00', 'Entregue', 4),
+-- OS 6 (Entregue)
+(6, '2024-05-12 08:45:00', 'Aberto', 5), (6, '2024-05-12 10:00:00', 'Em Diagnostico', 6), (6, '2024-05-13 09:30:00', 'Em Execucao', 6),
+(6, '2024-05-13 14:00:00', 'Concluido', 6), (6, '2024-05-14 16:00:00', 'Entregue', 5),
+-- OS 7 a 10 (Entregues)
 (7, '2024-05-15 13:10:00', 'Aberto', 3), (7, '2024-05-16 09:00:00', 'Em Diagnostico', 7), (7, '2024-05-17 10:00:00', 'Concluido', 7), (7, '2024-05-18 11:30:00', 'Entregue', 3),
 (8, '2024-05-18 15:30:00', 'Aberto', 4), (8, '2024-05-19 10:00:00', 'Em Diagnostico', 8), (8, '2024-05-20 14:00:00', 'Concluido', 8), (8, '2024-05-21 09:00:00', 'Entregue', 4),
 (9, '2024-05-20 09:50:00', 'Aberto', 5), (9, '2024-05-21 08:30:00', 'Em Diagnostico', 9), (9, '2024-05-21 16:00:00', 'Concluido', 9), (9, '2024-05-22 10:00:00', 'Entregue', 5),
 (10, '2024-05-22 11:00:00', 'Aberto', 3), (10, '2024-05-23 09:00:00', 'Em Diagnostico', 10), (10, '2024-05-24 15:00:00', 'Concluido', 10), (10, '2024-05-25 14:00:00', 'Entregue', 3),
-
--- OS 11 a 20 (Concluídas: 4 transições cada = 40 registros)
+-- OS 11 a 20 (Concluídas)
 (11, '2024-06-01 10:00:00', 'Aberto', 4), (11, '2024-06-01 14:00:00', 'Em Diagnostico', 6), (11, '2024-06-02 09:00:00', 'Em Execucao', 6), (11, '2024-06-03 11:00:00', 'Concluido', 6),
 (12, '2024-06-03 14:15:00', 'Aberto', 5), (12, '2024-06-04 08:30:00', 'Em Diagnostico', 7), (12, '2024-06-04 13:00:00', 'Em Execucao', 7), (12, '2024-06-05 10:00:00', 'Concluido', 7),
 (13, '2024-06-05 09:30:00', 'Aberto', 3), (13, '2024-06-06 10:00:00', 'Em Diagnostico', 8), (13, '2024-06-07 09:00:00', 'Em Execucao', 8), (13, '2024-06-08 14:00:00', 'Concluido', 8),
@@ -340,8 +291,7 @@ INSERT INTO HISTORICO_STATUS_OS (id_os, data_hora, status_novo, id_funcionario) 
 (18, '2024-06-18 08:30:00', 'Aberto', 5), (18, '2024-06-18 11:00:00', 'Em Diagnostico', 8), (18, '2024-06-19 10:00:00', 'Em Execucao', 8), (18, '2024-06-20 16:30:00', 'Concluido', 8),
 (19, '2024-06-20 10:40:00', 'Aberto', 3), (19, '2024-06-21 09:00:00', 'Em Diagnostico', 9), (19, '2024-06-21 15:00:00', 'Em Execucao', 9), (19, '2024-06-22 11:30:00', 'Concluido', 9),
 (20, '2024-06-22 14:00:00', 'Aberto', 4), (20, '2024-06-23 09:00:00', 'Em Diagnostico', 10), (20, '2024-06-23 16:00:00', 'Em Execucao', 10), (20, '2024-06-24 10:00:00', 'Concluido', 10),
-
--- OS 21 a 28 (Em Execução: 3 transições cada = 24 registros)
+-- OS 21 a 28 (Em Execução)
 (21, '2024-07-01 09:10:00', 'Aberto', 5), (21, '2024-07-01 14:00:00', 'Em Diagnostico', 6), (21, '2024-07-02 09:00:00', 'Em Execucao', 6),
 (22, '2024-07-02 11:30:00', 'Aberto', 3), (22, '2024-07-02 15:00:00', 'Em Diagnostico', 7), (22, '2024-07-03 10:00:00', 'Em Execucao', 7),
 (23, '2024-07-03 14:00:00', 'Aberto', 4), (23, '2024-07-04 09:00:00', 'Em Diagnostico', 8), (23, '2024-07-04 14:30:00', 'Em Execucao', 8),
@@ -350,22 +300,19 @@ INSERT INTO HISTORICO_STATUS_OS (id_os, data_hora, status_novo, id_funcionario) 
 (26, '2024-07-06 10:20:00', 'Aberto', 4), (26, '2024-07-06 14:00:00', 'Em Diagnostico', 6), (26, '2024-07-07 10:00:00', 'Em Execucao', 6),
 (27, '2024-07-08 13:40:00', 'Aberto', 5), (27, '2024-07-09 09:00:00', 'Em Diagnostico', 7), (27, '2024-07-09 15:00:00', 'Em Execucao', 7),
 (28, '2024-07-09 15:00:00', 'Aberto', 3), (28, '2024-07-10 08:30:00', 'Em Diagnostico', 8), (28, '2024-07-10 11:30:00', 'Em Execucao', 8),
-
--- OS 29 a 33 (Aguardando Peça: 3 transições cada = 15 registros)
+-- OS 29 a 33 (Aguardando Peça)
 (29, '2024-07-10 09:00:00', 'Aberto', 4), (29, '2024-07-10 11:00:00', 'Em Diagnostico', 9), (29, '2024-07-11 09:30:00', 'Aguardando Peca', 9),
 (30, '2024-07-11 11:10:00', 'Aberto', 5), (30, '2024-07-11 15:00:00', 'Em Diagnostico', 10), (30, '2024-07-12 10:00:00', 'Aguardando Peca', 10),
 (31, '2024-07-12 14:30:00', 'Aberto', 3), (31, '2024-07-13 09:00:00', 'Em Diagnostico', 6), (31, '2024-07-13 14:00:00', 'Aguardando Peca', 6),
 (32, '2024-07-13 16:00:00', 'Aberto', 4), (32, '2024-07-14 10:00:00', 'Em Diagnostico', 7), (32, '2024-07-14 16:30:00', 'Aguardando Peca', 7),
 (33, '2024-07-15 08:30:00', 'Aberto', 5), (33, '2024-07-15 11:30:00', 'Em Diagnostico', 8), (33, '2024-07-16 09:00:00', 'Aguardando Peca', 8),
-
--- OS 34 a 38 (Em Diagnóstico: 2 transições cada = 10 registros)
+-- OS 34 a 38 (Em Diagnóstico)
 (34, '2024-07-16 10:00:00', 'Aberto', 3), (34, '2024-07-16 14:00:00', 'Em Diagnostico', 9),
 (35, '2024-07-17 12:00:00', 'Aberto', 4), (35, '2024-07-17 15:30:00', 'Em Diagnostico', 10),
 (36, '2024-07-18 14:20:00', 'Aberto', 5), (36, '2024-07-19 09:00:00', 'Em Diagnostico', 6),
 (37, '2024-07-19 16:10:00', 'Aberto', 3), (37, '2024-07-20 08:30:00', 'Em Diagnostico', 7),
 (38, '2024-07-20 09:40:00', 'Aberto', 4), (38, '2024-07-20 11:00:00', 'Em Diagnostico', 8),
-
--- OS 39 a 42 (Aberto: 1 transição cada = 4 registros)
+-- OS 39 a 42 (Aberto)
 (39, '2024-07-21 11:00:00', 'Aberto', 5),
 (40, '2024-07-21 13:30:00', 'Aberto', 3),
 (41, '2024-07-22 08:15:00', 'Aberto', 4),
@@ -374,7 +321,6 @@ INSERT INTO HISTORICO_STATUS_OS (id_os, data_hora, status_novo, id_funcionario) 
 -- ============================================================
 -- 9. POVOAMENTO DA TABELA POSSUI_SERVICO (60 registros)
 -- ============================================================
--- Cumpre RN15: quantidade > 0 e preco_praticado >= 0
 INSERT INTO POSSUI_SERVICO (id_servico, id_os, quantidade, preco_praticado) VALUES
 (3, 1, 1, 180.00),
 (2, 2, 1, 200.00),
@@ -414,9 +360,9 @@ INSERT INTO POSSUI_SERVICO (id_servico, id_os, quantidade, preco_praticado) VALU
 (4, 36, 1, 90.00),
 (4, 37, 1, 90.00),
 (4, 38, 1, 90.00),
-(1, 2, 1, 150.00), -- Segundo serviço na OS 2
-(3, 3, 1, 180.00), -- Serviço adicional na OS 3
-(10, 3, 1, 350.00), -- Serviço de recuperação na OS 3
+(1, 2, 1, 150.00),
+(3, 3, 1, 180.00),
+(10, 3, 1, 350.00),
 (3, 5, 1, 180.00),
 (1, 7, 1, 150.00),
 (3, 11, 1, 180.00),
@@ -438,65 +384,62 @@ INSERT INTO POSSUI_SERVICO (id_servico, id_os, quantidade, preco_praticado) VALU
 -- 10. POVOAMENTO DA TABELA UTILIZA_PECA (55 registros)
 -- ============================================================
 -- Cumpre RN17, RN18, RN19:
--- A inserção nesta tabela dispara a trigger trg_utiliza_peca_rn18_rn19,
--- que abate a quantidade de peças automaticamente de PECA.qtd_estoque.
+-- A inserção nesta tabela dispara a trigger que abate
+-- a quantidade de peças automaticamente de PECA.qtd_estoque.
+-- Distribuição alinhada com as ordens de serviço executadas e entregues.
 INSERT INTO UTILIZA_PECA (id_peca, id_os, quantidade, preco_praticado) VALUES
-(6, 1, 1, 60.00),  -- Pasta Térmica
-(7, 2, 1, 700.00), -- Tela Galaxy S21
-(1, 3, 1, 320.00), -- SSD 512GB
-(9, 4, 1, 380.00), -- Fonte ATX 600W
-(10, 5, 1, 45.00), -- Conector USB-C
-(5, 6, 1, 290.00), -- Bateria Dell
-(6, 7, 1, 60.00),  -- Pasta Térmica
-(8, 12, 1, 250.00),-- Bateria iPhone 11
-(2, 13, 1, 210.00),-- Memória RAM DDR4 8GB
-(6, 14, 1, 60.00), -- Pasta Térmica
-(4, 15, 1, 480.00),-- Tela LED 15.6
-(5, 16, 1, 290.00),-- Bateria Dell
-(10, 17, 1, 45.00),-- Conector USB-C
-(4, 19, 1, 480.00),-- Tela LED 15.6
-(1, 21, 1, 320.00),-- SSD 512GB
-(6, 21, 1, 60.00), -- Pasta Térmica
-(8, 23, 1, 250.00),-- Bateria iPhone 11
-(1, 24, 1, 320.00),-- SSD 512GB
-(11, 25, 1, 130.00),-- Cooler Air
-(8, 26, 1, 250.00),-- Bateria iPhone 11
-(4, 27, 1, 480.00),-- Tela LED 15.6
-(2, 28, 1, 210.00),-- Memória RAM DDR4 8GB
-(3, 11, 1, 380.00),-- Memória RAM 16GB Desktop
-(2, 3, 1, 210.00), -- Memória adicional na OS 3
-(6, 3, 1, 60.00),  -- Pasta Térmica na OS 3
-(10, 9, 1, 45.00),  -- Conector USB-C na OS 9
-(6, 18, 1, 60.00), -- Pasta Térmica na OS 18
-(12, 1, 1, 120.00),-- Fonte carregador universal OS 1
-(12, 10, 1, 120.00),-- Fonte carregador OS 10
-(12, 20, 1, 120.00),-- Fonte carregador OS 20
-(6, 22, 1, 60.00),  -- Pasta Térmica OS 22
-(3, 18, 1, 380.00), -- Memória RAM OS 18
-(10, 22, 1, 45.00), -- Componente USB-C OS 22
-(6, 25, 1, 60.00),  -- Pasta Térmica OS 25
-(1, 28, 1, 320.00), -- SSD 512GB OS 28
-(6, 28, 1, 60.00),  -- Pasta Térmica OS 28
-(10, 29, 1, 45.00), -- Peça OS 29
-(7, 30, 1, 700.00), -- Display Z Flip OS 30
-(10, 31, 2, 45.00), -- 2x Componentes SMD OS 31
-(6, 32, 1, 60.00),  -- Pasta Térmica OS 32
-(8, 33, 1, 250.00), -- Módulo Câmera OS 33
-(6, 34, 1, 60.00),  -- Pasta Térmica OS 34
-(6, 35, 1, 60.00),  -- Pasta Térmica OS 35
-(6, 36, 1, 60.00),  -- Pasta Térmica OS 36
-(6, 37, 1, 60.00),  -- Pasta Térmica OS 37
-(9, 38, 1, 380.00), -- Fonte ATX OS 38
-(6, 11, 1, 60.00),  -- Pasta Térmica OS 11
-(6, 13, 1, 60.00),  -- Pasta Térmica OS 13
-(6, 15, 1, 60.00),  -- Pasta Térmica OS 15
-(6, 16, 1, 60.00),  -- Pasta Térmica OS 16
-(6, 17, 1, 60.00),  -- Pasta Térmica OS 17
-(6, 19, 1, 60.00),  -- Pasta Térmica OS 19
-(6, 20, 1, 60.00),  -- Pasta Térmica OS 20
-(6, 23, 1, 60.00),  -- Pasta Térmica OS 23
-(6, 27, 1, 60.00);  -- Pasta Térmica OS 27
-
--- ============================================================
--- FIM DO SCRIPT DE CARGA (02_carga.sql)
--- ============================================================
+(6, 1, 1, 60.00),
+(2, 1, 1, 210.00),
+(4, 2, 1, 480.00),
+(8, 2, 1, 250.00),
+(1, 3, 1, 320.00),
+(2, 3, 1, 210.00),
+(6, 3, 1, 60.00),
+(1, 4, 1, 320.00),
+(10, 5, 1, 45.00),
+(8, 5, 1, 250.00),
+(8, 6, 1, 250.00),
+(10, 6, 1, 45.00),
+(6, 7, 1, 60.00),
+(2, 7, 1, 210.00),
+(1, 7, 1, 320.00),
+(6, 8, 1, 60.00),
+(10, 8, 1, 45.00),
+(10, 9, 1, 45.00),
+(8, 9, 1, 250.00),
+(1, 10, 1, 320.00),
+(6, 10, 1, 60.00),
+(3, 11, 1, 380.00),
+(6, 11, 1, 60.00),
+(8, 12, 1, 250.00),
+(10, 12, 1, 45.00),
+(2, 13, 1, 210.00),
+(6, 13, 1, 60.00),
+(6, 14, 1, 60.00),
+(10, 14, 1, 45.00),
+(7, 15, 1, 700.00),
+(8, 15, 1, 250.00),
+(5, 16, 1, 290.00),
+(2, 16, 1, 210.00),
+(10, 17, 1, 45.00),
+(8, 17, 1, 250.00),
+(6, 18, 1, 60.00),
+(3, 18, 1, 380.00),
+(4, 19, 1, 480.00),
+(2, 19, 1, 210.00),
+(10, 20, 1, 45.00),
+(8, 20, 1, 250.00),
+(1, 21, 1, 320.00),
+(6, 21, 1, 60.00),
+(10, 22, 1, 45.00),
+(6, 22, 1, 60.00),
+(8, 23, 1, 250.00),
+(10, 23, 1, 45.00),
+(1, 24, 1, 320.00),
+(2, 24, 1, 210.00),
+(11, 25, 1, 130.00),
+(6, 25, 1, 60.00),
+(8, 26, 1, 250.00),
+(4, 27, 1, 480.00),
+(8, 28, 1, 250.00),
+(12, 29, 1, 120.00);
