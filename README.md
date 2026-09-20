@@ -10,6 +10,9 @@ O SGATM é um banco de dados projetado para gerenciar as operações de uma ofic
 * **Maria Rosa Magalhães Brasileiro** - [maria.brasileiro@a.ucb.br](mailto:maria.brasileiro@a.ucb.br) | [@mariarosambrasileiro07](https://github.com/mariarosambrasileiro07)
 * **Lorena Dalmagro** - [lorena.videro@a.ucb.br](mailto:lorena.videro@a.ucb.br) | [@loredalmagro](https://github.com/loredalmagro)
 * **Miguel Araújo de Melo** - [miguel.amelo@a.ucb.br](mailto:email@a.ucb.br) | [@Miguel-arauujo](https://github.com/Miguel-arauujo)
+* **Mateus Elias Pereira Soares**
+* [mateus.esoares@a.ucb.br]
+* (mailto:mateus.esoares@a.ucb.br) | [@mateus04478](https://github.com/mateus04478)
 ## Tecnologias Utilizadas
 * **SGBD:** MySQL 8.0+
 * **Codificação de Caracteres:** `utf8mb4`
