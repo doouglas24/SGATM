@@ -15,12 +15,12 @@ USE sgatm_db;
 -- ------------------------------------------------------------
 -- CONSULTA 01 (Básica)
 -- Pergunta de Negócio: Listar o nome, e-mail e telefone de todas
--- as pessoas cadastradas cujo e-mail pertença ao domínio 'email.com',
+-- as pessoas cadastradas cujo e-mail pertença ao domínio 'gmail.com',
 -- ordenadas alfabeticamente pelo nome.
 -- ------------------------------------------------------------
 SELECT nome, email, telefone
 FROM PESSOA
-WHERE email LIKE '%@email.com'
+WHERE email LIKE '%@gmail.com'
 ORDER BY nome ASC;
 
 -- ------------------------------------------------------------
@@ -187,7 +187,7 @@ ORDER BY sc.preco_base DESC;
 -- ------------------------------------------------------------
 -- CONSULTA 12 (Subconsulta com EXISTS)
 -- Pergunta de Negócio: Listar os clientes que possuem pelo menos uma Ordem de Serviço
--- em que foi utilizada a peça 'Bateria iPhone 11' (utilizando a cláusula EXISTS).
+-- em que foi utilizada a peça 'Bateria Apple iPhone 11 Original' (utilizando a cláusula EXISTS).
 -- ------------------------------------------------------------
 SELECT 
     c.id_cliente, 
@@ -202,7 +202,7 @@ WHERE EXISTS (
     INNER JOIN UTILIZA_PECA up ON os.id_os = up.id_os
     INNER JOIN PECA pe ON up.id_peca = pe.id_peca
     WHERE os.id_cliente = c.id_cliente
-      AND pe.descricao_peca LIKE '%Bateria iPhone 11%'
+      AND pe.descricao_peca LIKE '%Bateria Apple iPhone 11%'
 )
 ORDER BY p.nome ASC;
 

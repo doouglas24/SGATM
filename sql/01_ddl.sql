@@ -18,15 +18,14 @@ SET NAMES 'utf8mb4';
 -- ============================================================
 CREATE TABLE PESSOA (
     id_pessoa INT AUTO_INCREMENT,
-    -- CORRIGIDO (H9): O Anexo A pedia 11 dígitos. VARCHAR(14) permitia máscara.
-    cpf       VARCHAR(11)  NOT NULL,
+    cpf       VARCHAR(11)  NOT NULL,  -- somente 11 dígitos, sem máscara
     nome      VARCHAR(100) NOT NULL,
     email     VARCHAR(100) NOT NULL,
     telefone  VARCHAR(20)  NULL,
     CONSTRAINT pk_pessoa PRIMARY KEY (id_pessoa),
     CONSTRAINT uq_pessoa_cpf   UNIQUE (cpf),
     CONSTRAINT uq_pessoa_email UNIQUE (email),
-    -- CORRIGIDO (H9): Validação básica de formato para impedir "abc" e "nao-e-email"
+    -- Formato básico: CPF com 11 dígitos numéricos e e-mail contendo '@'
     CONSTRAINT ck_pessoa_cpf CHECK (LENGTH(cpf) = 11 AND cpf REGEXP '^[0-9]+$'),
     CONSTRAINT ck_pessoa_email CHECK (email LIKE '%@%')
 ) ENGINE=InnoDB;
@@ -81,7 +80,7 @@ BEGIN
         SIGNAL SQLSTATE '45000'
             SET MESSAGE_TEXT = 'Um funcionario nao pode ser seu proprio supervisor.';
     END IF;
-    -- CORRIGIDO (H5): Validar se o supervisor informado é realmente um Gerente
+    -- RN04: o supervisor informado precisa ter cargo de Gerente
     IF NEW.id_gerente IS NOT NULL AND (SELECT cargo FROM FUNCIONARIO WHERE id_funcionario = NEW.id_gerente) <> 'Gerente' THEN
         SIGNAL SQLSTATE '45000'
             SET MESSAGE_TEXT = 'RN04: O supervisor (id_gerente) deve ter o cargo de Gerente.';
@@ -100,7 +99,7 @@ BEGIN
         SIGNAL SQLSTATE '45000'
             SET MESSAGE_TEXT = 'Um funcionario nao pode ser seu proprio supervisor.';
     END IF;
-    -- CORRIGIDO (H5): Validar se o supervisor informado é realmente um Gerente
+    -- RN04: o supervisor informado precisa ter cargo de Gerente
     IF NEW.id_gerente IS NOT NULL AND (SELECT cargo FROM FUNCIONARIO WHERE id_funcionario = NEW.id_gerente) <> 'Gerente' THEN
         SIGNAL SQLSTATE '45000'
             SET MESSAGE_TEXT = 'RN04: O supervisor (id_gerente) deve ter o cargo de Gerente.';
@@ -120,7 +119,7 @@ CREATE TABLE EQUIPAMENTO (
     id_cliente     INT NOT NULL,
     CONSTRAINT pk_equipamento PRIMARY KEY (id_equipamento),
     CONSTRAINT uq_equipamento_numero_serie UNIQUE (numero_serie),
-    -- CORRIGIDO (H3): Criada UNIQUE composta para permitir a amarração segura na OS
+    -- UNIQUE composta: permite a FK composta de ORDEM_SERVICO (equipamento pertence ao cliente da OS)
     CONSTRAINT uq_equipamento_cliente UNIQUE (id_equipamento, id_cliente),
     CONSTRAINT fk_equipamento_cliente FOREIGN KEY (id_cliente)
         REFERENCES CLIENTE (id_cliente)
@@ -152,14 +151,13 @@ CREATE TABLE ORDEM_SERVICO (
     CONSTRAINT fk_os_tecnico FOREIGN KEY (id_tecnico)
         REFERENCES FUNCIONARIO (id_funcionario)
         ON DELETE RESTRICT ON UPDATE CASCADE,
-    -- CORRIGIDO (H3): Substituídas as duas FKs soltas por uma FK Composta. 
-    -- Agora o banco proíbe abrir OS com equipamento do cliente 1 para o cliente 2.
+    -- FK composta: o banco impede abrir OS com equipamento que pertence a outro cliente.
     CONSTRAINT fk_os_equipamento_cliente FOREIGN KEY (id_equipamento, id_cliente)
         REFERENCES EQUIPAMENTO (id_equipamento, id_cliente)
         ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT ck_os_data_prevista
         CHECK (data_prevista IS NULL OR data_prevista >= DATE(data_abertura)),
-    -- CORRIGIDO (H4): O professor notou que 'Entregue' passava sem diagnóstico.
+    -- RN10: 'Concluido' e 'Entregue' exigem diagnóstico técnico preenchido.
     CONSTRAINT ck_os_conclusao_exige_diagnostico
         CHECK (status NOT IN ('Concluido', 'Entregue') OR diagnostico_tecnico IS NOT NULL)
 ) ENGINE=InnoDB;
@@ -194,14 +192,23 @@ BEGIN
         SIGNAL SQLSTATE '45000'
             SET MESSAGE_TEXT = 'RN09: id_tecnico deve referenciar um funcionario com cargo Tecnico.';
     END IF;
-    -- CORRIGIDO (H6): Faltava checar o id_atendente no momento do UPDATE
+    -- RN09: atendente também não pode ser Técnico no UPDATE
     IF (SELECT cargo FROM FUNCIONARIO WHERE id_funcionario = NEW.id_atendente) = 'Tecnico' THEN
         SIGNAL SQLSTATE '45000'
             SET MESSAGE_TEXT = 'RN09: id_atendente nao pode ser um funcionario com cargo Tecnico.';
     END IF;
 END$$
 
--- CORRIGIDO (H7): Faltava a trigger que gera o histórico automaticamente ao mudar status
+-- RN12: a abertura da OS gera o primeiro evento do histórico ('Aberto')
+CREATE TRIGGER trg_os_rn12_abertura
+AFTER INSERT ON ORDEM_SERVICO
+FOR EACH ROW
+BEGIN
+    INSERT INTO HISTORICO_STATUS_OS (id_os, data_hora, status_novo, id_funcionario)
+    VALUES (NEW.id_os, NEW.data_abertura, 'Aberto', NEW.id_atendente);
+END$$
+
+-- RN12: toda mudança de status gera um registro no histórico
 CREATE TRIGGER trg_os_rn12_historico
 AFTER UPDATE ON ORDEM_SERVICO
 FOR EACH ROW
@@ -217,7 +224,7 @@ DELIMITER ;
 -- 6. Tabela HISTORICO_STATUS_OS (ENTIDADE FRACA) -- Implementa RN12, RN13
 -- ============================================================
 CREATE TABLE HISTORICO_STATUS_OS (
-    -- CORRIGIDO (H8): Adicionado id_historico. PK dupla com DATETIME falha se houver 2 eventos no mesmo segundo.
+    -- Chave substituta: dois eventos da mesma OS podem ocorrer no mesmo segundo.
     id_historico   INT AUTO_INCREMENT,
     id_os          INT NOT NULL,
     data_hora      DATETIME NOT NULL,
@@ -225,8 +232,7 @@ CREATE TABLE HISTORICO_STATUS_OS (
                          'Em Execucao','Concluido','Entregue','Cancelado') NOT NULL,
     id_funcionario INT NOT NULL,
     CONSTRAINT pk_historico_status_os PRIMARY KEY (id_historico),
-    -- CORRIGIDO (H1): Trocado CASCADE por RESTRICT. Assim o SGBD proíbe apagar a OS 
-    -- e contorna o problema do MySQL de não disparar trigger em exclusão em cascata.
+    -- RESTRICT: o histórico é imutável (RN13); a OS não pode ser apagada enquanto houver histórico.
     CONSTRAINT fk_historico_os FOREIGN KEY (id_os)
         REFERENCES ORDEM_SERVICO (id_os)
         ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -313,9 +319,10 @@ CREATE TABLE UTILIZA_PECA (
     CONSTRAINT fk_utiliza_peca FOREIGN KEY (id_peca)
         REFERENCES PECA (id_peca)
         ON DELETE RESTRICT ON UPDATE CASCADE,
+    -- RESTRICT: o MySQL não dispara trigger em exclusão em cascata, então o estoque não seria devolvido (RN19).
     CONSTRAINT fk_utiliza_os FOREIGN KEY (id_os)
         REFERENCES ORDEM_SERVICO (id_os)
-        ON DELETE CASCADE ON UPDATE CASCADE,
+        ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT ck_utiliza_quantidade CHECK (quantidade > 0),
     CONSTRAINT ck_utiliza_preco CHECK (preco_praticado >= 0)
 ) ENGINE=InnoDB;
@@ -338,7 +345,7 @@ BEGIN
      WHERE id_peca = NEW.id_peca;
 END$$
 
--- CORRIGIDO (H2): Faltava trigger para devolver a peça ao estoque se for deletada da OS
+-- RN19: ao remover a peça da OS, a quantidade volta ao estoque
 CREATE TRIGGER trg_utiliza_peca_rn19_del
 AFTER DELETE ON UTILIZA_PECA
 FOR EACH ROW

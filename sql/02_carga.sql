@@ -32,57 +32,57 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- ============================================================
 INSERT INTO PESSOA (id_pessoa, cpf, nome, email, telefone) VALUES
 -- Funcionários (1-10)
-(1, '111.222.333-01', 'Carlos Eduardo Lima', 'carlos.lima@sgatm.com.br', '(61) 98111-0001'),
-(2, '111.222.333-02', 'Ana Paula Ribeiro', 'ana.ribeiro@sgatm.com.br', '(61) 98111-0002'),
-(3, '111.222.333-03', 'Marcos Vinicius Souza', 'marcos.souza@sgatm.com.br', '(61) 98111-0003'),
-(4, '111.222.333-04', 'Juliana Mendes Rocha', 'juliana.rocha@sgatm.com.br', '(61) 98111-0004'),
-(5, '111.222.333-05', 'Roberto Fonseca Barbosa', 'roberto.barbosa@sgatm.com.br', NULL),
-(6, '111.222.333-06', 'Fernando Castro Alves', 'fernando.alves@sgatm.com.br', '(61) 98111-0006'),
-(7, '111.222.333-07', 'Lucas Prado Martins', 'lucas.martins@sgatm.com.br', '(61) 98111-0007'),
-(8, '111.222.333-08', 'Beatriz Oliveira Santos', 'beatriz.santos@sgatm.com.br', '(61) 98111-0008'),
-(9, '111.222.333-09', 'Diego Ferreira Ramos', 'diego.ramos@sgatm.com.br', '(61) 98111-0009'),
-(10, '111.222.333-10', 'Patricia Gomez Silva', 'patricia.silva@sgatm.com.br', NULL),
+(1, '11122233301', 'Carlos Eduardo Lima', 'carlos.lima@sgatm.com.br', '(61) 98111-0001'),
+(2, '11122233302', 'Ana Paula Ribeiro', 'ana.ribeiro@sgatm.com.br', '(61) 98111-0002'),
+(3, '11122233303', 'Marcos Vinicius Souza', 'marcos.souza@sgatm.com.br', '(61) 98111-0003'),
+(4, '11122233304', 'Juliana Mendes Rocha', 'juliana.rocha@sgatm.com.br', '(61) 98111-0004'),
+(5, '11122233305', 'Roberto Fonseca Barbosa', 'roberto.barbosa@sgatm.com.br', NULL),
+(6, '11122233306', 'Fernando Castro Alves', 'fernando.alves@sgatm.com.br', '(61) 98111-0006'),
+(7, '11122233307', 'Lucas Prado Martins', 'lucas.martins@sgatm.com.br', '(61) 98111-0007'),
+(8, '11122233308', 'Beatriz Oliveira Santos', 'beatriz.santos@sgatm.com.br', '(61) 98111-0008'),
+(9, '11122233309', 'Diego Ferreira Ramos', 'diego.ramos@sgatm.com.br', '(61) 98111-0009'),
+(10, '11122233310', 'Patricia Gomez Silva', 'patricia.silva@sgatm.com.br', NULL),
 -- Clientes (11-50)
-(11, '222.333.444-11', 'Adriana Maria Guimaraes', 'adriana.guimaraes@gmail.com', '(61) 99222-0011'),
-(12, '222.333.444-12', 'Bruno Henrique Costa', 'bruno.costa@hotmail.com', '(61) 99222-0012'),
-(13, '222.333.444-13', 'Camila Xavier Pires', 'camila.pires@yahoo.com.br', '(61) 99222-0013'),
-(14, '222.333.444-14', 'Daniel Nogueira Faria', 'daniel.faria@outlook.com', NULL),
-(15, '222.333.444-15', 'Eduardo Augusto Monteiro', 'eduardo.monteiro@gmail.com', '(61) 99222-0015'),
-(16, '222.333.444-16', 'Fernanda Lopes Viana', 'fernanda.viana@gmail.com', '(61) 99222-0016'),
-(17, '222.333.444-17', 'Gabriel Vasconcelos', 'gabriel.vasc@gmail.com', '(61) 99222-0017'),
-(18, '222.333.444-18', 'Helena Maria Brandao', 'helena.brandao@uol.com.br', '(61) 99222-0018'),
-(19, '222.333.444-19', 'Igor Teixeira Duarte', 'igor.duarte@gmail.com', NULL),
-(20, '222.333.444-20', 'Jessica Aguiar Neves', 'jessica.neves@gmail.com', '(61) 99222-0020'),
-(21, '222.333.444-21', 'Kleverton Jose Sales', 'kleverton.sales@gmail.com', '(61) 99222-0021'),
-(22, '222.333.444-22', 'Larissa Machado Reis', 'larissa.reis@hotmail.com', '(61) 99222-0022'),
-(23, '222.333.444-23', 'Marcelo Antunes Correa', 'marcelo.correa@gmail.com', '(61) 99222-0023'),
-(24, '222.333.444-24', 'Natalia Siqueira Franco', 'natalia.franco@gmail.com', '(61) 99222-0024'),
-(25, '222.333.444-25', 'Otavio Augusto Bueno', 'otavio.bueno@outlook.com', '(61) 99222-0025'),
-(26, '222.333.444-26', 'Paula Renata Peixoto', 'paula.peixoto@gmail.com', NULL),
-(27, '222.333.444-27', 'Renato Garcia Mendonca', 'renato.mendonca@gmail.com', '(61) 99222-0027'),
-(28, '222.333.444-28', 'Sabrina Talarico Maia', 'sabrina.maia@gmail.com', '(61) 99222-0028'),
-(29, '222.333.444-29', 'Thiago Borges Araujo', 'thiago.araujo@gmail.com', '(61) 99222-0029'),
-(30, '222.333.444-30', 'Vanessa Cristina Campos', 'vanessa.campos@yahoo.com', '(61) 99222-0030'),
-(31, '222.333.444-31', 'Wagner Silva Prado', 'wagner.prado@gmail.com', '(61) 99222-0031'),
-(32, '222.333.444-32', 'Yasmin Figueiredo Melo', 'yasmin.melo@gmail.com', NULL),
-(33, '222.333.444-33', 'Zaidan Castro Nunes', 'zaidan.nunes@gmail.com', '(61) 99222-0033'),
-(34, '222.333.444-34', 'Arthur Pendelton Rios', 'arthur.rios@gmail.com', '(61) 99222-0034'),
-(35, '222.333.444-35', 'Bianca Cordreiro Luz', 'bianca.luz@gmail.com', '(61) 99222-0035'),
-(36, '222.333.444-36', 'Caio Vinicius Meireles', 'caio.meireles@gmail.com', '(61) 99222-0036'),
-(37, '222.333.444-37', 'Debora Esteves Paiva', 'debora.paiva@gmail.com', '(61) 99222-0037'),
-(38, '222.333.444-38', 'Erick Breno Fernandes', 'erick.fernandes@gmail.com', NULL),
-(39, '222.333.444-39', 'Flavia Alessandra Sobral', 'flavia.sobral@gmail.com', '(61) 99222-0039'),
-(40, '222.333.444-40', 'Gustavo Henrique Leal', 'gustavo.leal@gmail.com', '(61) 99222-0040'),
-(41, '222.333.444-41', 'Hellen Cristina Matos', 'hellen.matos@gmail.com', '(61) 99222-0041'),
-(42, '222.333.444-42', 'Ismael David Diniz', 'ismael.diniz@gmail.com', '(61) 99222-0042'),
-(43, '222.333.444-43', 'Janaina Tavares Andrade', 'janaina.andrade@gmail.com', '(61) 99222-0043'),
-(44, '222.333.444-44', 'Luan Felipe Maciel', 'luan.maciel@gmail.com', NULL),
-(45, '222.333.444-45', 'Mirella Santos Cavalcante', 'mirella.cavalcante@gmail.com', '(61) 99222-0045'),
-(46, '222.333.444-46', 'Natan Rodrigues Barreto', 'natan.barreto@gmail.com', '(61) 99222-0046'),
-(47, '222.333.444-47', 'Olivia Fontes Medeiros', 'olivia.medeiros@gmail.com', '(61) 99222-0047'),
-(48, '222.333.444-48', 'Pedro Henrique Alcantara', 'pedro.alcantara@gmail.com', '(61) 99222-0048'),
-(49, '222.333.444-49', 'Quezia Regina Siqueira', 'quezia.siqueira@gmail.com', '(61) 99222-0049'),
-(50, '222.333.444-50', 'Rafael Bittencourt Luz', 'rafael.luz@gmail.com', '(61) 99222-0050');
+(11, '22233344411', 'Adriana Maria Guimaraes', 'adriana.guimaraes@gmail.com', '(61) 99222-0011'),
+(12, '22233344412', 'Bruno Henrique Costa', 'bruno.costa@hotmail.com', '(61) 99222-0012'),
+(13, '22233344413', 'Camila Xavier Pires', 'camila.pires@yahoo.com.br', '(61) 99222-0013'),
+(14, '22233344414', 'Daniel Nogueira Faria', 'daniel.faria@outlook.com', NULL),
+(15, '22233344415', 'Eduardo Augusto Monteiro', 'eduardo.monteiro@gmail.com', '(61) 99222-0015'),
+(16, '22233344416', 'Fernanda Lopes Viana', 'fernanda.viana@gmail.com', '(61) 99222-0016'),
+(17, '22233344417', 'Gabriel Vasconcelos', 'gabriel.vasc@gmail.com', '(61) 99222-0017'),
+(18, '22233344418', 'Helena Maria Brandao', 'helena.brandao@uol.com.br', '(61) 99222-0018'),
+(19, '22233344419', 'Igor Teixeira Duarte', 'igor.duarte@gmail.com', NULL),
+(20, '22233344420', 'Jessica Aguiar Neves', 'jessica.neves@gmail.com', '(61) 99222-0020'),
+(21, '22233344421', 'Kleverton Jose Sales', 'kleverton.sales@gmail.com', '(61) 99222-0021'),
+(22, '22233344422', 'Larissa Machado Reis', 'larissa.reis@hotmail.com', '(61) 99222-0022'),
+(23, '22233344423', 'Marcelo Antunes Correa', 'marcelo.correa@gmail.com', '(61) 99222-0023'),
+(24, '22233344424', 'Natalia Siqueira Franco', 'natalia.franco@gmail.com', '(61) 99222-0024'),
+(25, '22233344425', 'Otavio Augusto Bueno', 'otavio.bueno@outlook.com', '(61) 99222-0025'),
+(26, '22233344426', 'Paula Renata Peixoto', 'paula.peixoto@gmail.com', NULL),
+(27, '22233344427', 'Renato Garcia Mendonca', 'renato.mendonca@gmail.com', '(61) 99222-0027'),
+(28, '22233344428', 'Sabrina Talarico Maia', 'sabrina.maia@gmail.com', '(61) 99222-0028'),
+(29, '22233344429', 'Thiago Borges Araujo', 'thiago.araujo@gmail.com', '(61) 99222-0029'),
+(30, '22233344430', 'Vanessa Cristina Campos', 'vanessa.campos@yahoo.com', '(61) 99222-0030'),
+(31, '22233344431', 'Wagner Silva Prado', 'wagner.prado@gmail.com', '(61) 99222-0031'),
+(32, '22233344432', 'Yasmin Figueiredo Melo', 'yasmin.melo@gmail.com', NULL),
+(33, '22233344433', 'Zaidan Castro Nunes', 'zaidan.nunes@gmail.com', '(61) 99222-0033'),
+(34, '22233344434', 'Arthur Pendelton Rios', 'arthur.rios@gmail.com', '(61) 99222-0034'),
+(35, '22233344435', 'Bianca Cordreiro Luz', 'bianca.luz@gmail.com', '(61) 99222-0035'),
+(36, '22233344436', 'Caio Vinicius Meireles', 'caio.meireles@gmail.com', '(61) 99222-0036'),
+(37, '22233344437', 'Debora Esteves Paiva', 'debora.paiva@gmail.com', '(61) 99222-0037'),
+(38, '22233344438', 'Erick Breno Fernandes', 'erick.fernandes@gmail.com', NULL),
+(39, '22233344439', 'Flavia Alessandra Sobral', 'flavia.sobral@gmail.com', '(61) 99222-0039'),
+(40, '22233344440', 'Gustavo Henrique Leal', 'gustavo.leal@gmail.com', '(61) 99222-0040'),
+(41, '22233344441', 'Hellen Cristina Matos', 'hellen.matos@gmail.com', '(61) 99222-0041'),
+(42, '22233344442', 'Ismael David Diniz', 'ismael.diniz@gmail.com', '(61) 99222-0042'),
+(43, '22233344443', 'Janaina Tavares Andrade', 'janaina.andrade@gmail.com', '(61) 99222-0043'),
+(44, '22233344444', 'Luan Felipe Maciel', 'luan.maciel@gmail.com', NULL),
+(45, '22233344445', 'Mirella Santos Cavalcante', 'mirella.cavalcante@gmail.com', '(61) 99222-0045'),
+(46, '22233344446', 'Natan Rodrigues Barreto', 'natan.barreto@gmail.com', '(61) 99222-0046'),
+(47, '22233344447', 'Olivia Fontes Medeiros', 'olivia.medeiros@gmail.com', '(61) 99222-0047'),
+(48, '22233344448', 'Pedro Henrique Alcantara', 'pedro.alcantara@gmail.com', '(61) 99222-0048'),
+(49, '22233344449', 'Quezia Regina Siqueira', 'quezia.siqueira@gmail.com', '(61) 99222-0049'),
+(50, '22233344450', 'Rafael Bittencourt Luz', 'rafael.luz@gmail.com', '(61) 99222-0050');
 
 -- ============================================================
 -- 2. POVOAMENTO DA TABELA CLIENTE (40 registros)
@@ -184,6 +184,7 @@ INSERT INTO SERVICO_CATALOGO (id_servico, nome_servico, preco_base, tempo_estima
 
 -- ============================================================
 -- 6. POVOAMENTO DA TABELA PECA (12 registros)
+-- Peças 11 e 12 entram com estoque baixo: após a carga de UTILIZA_PECA ficam <= qtd_minima (caso de contorno da consulta 15).
 -- ============================================================
 INSERT INTO PECA (id_peca, descricao_peca, preco_custo, preco_venda, qtd_estoque, qtd_minima) VALUES
 (1, 'SSD NVMe M.2 512GB Kingston', 180.00, 320.00, 60, 5),
@@ -196,8 +197,8 @@ INSERT INTO PECA (id_peca, descricao_peca, preco_custo, preco_venda, qtd_estoque
 (8, 'Bateria Apple iPhone 11 Original', 120.00, 250.00, 25, 3),
 (9, 'Fonte ATX 600W 80 Plus Bronze Corsar', 210.00, 380.00, 30, 4),
 (10, 'Conector Carga USB-C Universal SMD', 8.00, 45.00, 120, 15),
-(11, 'Cooler Air CPU Intel/AMD High Performance', 60.00, 130.00, 35, 5),
-(12, 'Fonte Carregador Notebook Universal 65W', 55.00, 120.00, 30, 5);
+(11, 'Cooler Air CPU Intel/AMD High Performance', 60.00, 130.00, 6, 5),
+(12, 'Fonte Carregador Notebook Universal 65W', 55.00, 120.00, 6, 5);
 
 -- ============================================================
 -- 7. POVOAMENTO DA TABELA ORDEM_SERVICO (42 registros)
@@ -254,69 +255,67 @@ INSERT INTO ORDEM_SERVICO
 (42, 5, NULL, 1, 42, '2024-07-22 10:00:00', NULL, 'Segunda entrada do cliente 1: iPhone XR não liga.', NULL, 'Aberto');
 
 -- ============================================================
--- 8. POVOAMENTO DA TABELA HISTORICO_STATUS_OS (115 registros)
+-- 8. POVOAMENTO DA TABELA HISTORICO_STATUS_OS
+-- O evento 'Aberto' de cada OS é gerado pela trigger trg_os_rn12_abertura
+-- (data_hora = data_abertura, funcionário = atendente); aqui entram os demais eventos.
 -- ============================================================
 INSERT INTO HISTORICO_STATUS_OS (id_os, data_hora, status_novo, id_funcionario) VALUES
 -- OS 1 (Entregue)
-(1, '2024-05-01 09:00:00', 'Aberto', 3), (1, '2024-05-01 10:30:00', 'Em Diagnostico', 6), (1, '2024-05-01 14:00:00', 'Aguardando Peca', 6),
+(1, '2024-05-01 10:30:00', 'Em Diagnostico', 6), (1, '2024-05-01 14:00:00', 'Aguardando Peca', 6),
 (1, '2024-05-02 09:15:00', 'Em Execucao', 6), (1, '2024-05-02 16:00:00', 'Concluido', 6), (1, '2024-05-03 11:00:00', 'Entregue', 3),
 -- OS 2 (Entregue)
-(2, '2024-05-02 10:30:00', 'Aberto', 4), (2, '2024-05-02 11:45:00', 'Em Diagnostico', 7), (2, '2024-05-03 08:30:00', 'Em Execucao', 7),
+(2, '2024-05-02 11:45:00', 'Em Diagnostico', 7), (2, '2024-05-03 08:30:00', 'Em Execucao', 7),
 (2, '2024-05-03 17:00:00', 'Concluido', 7), (2, '2024-05-04 10:00:00', 'Entregue', 4),
 -- OS 3 (Entregue)
-(3, '2024-05-05 11:15:00', 'Aberto', 5), (3, '2024-05-05 14:00:00', 'Em Diagnostico', 8), (3, '2024-05-06 09:00:00', 'Em Execucao', 8),
+(3, '2024-05-05 14:00:00', 'Em Diagnostico', 8), (3, '2024-05-06 09:00:00', 'Em Execucao', 8),
 (3, '2024-05-06 15:30:00', 'Concluido', 8), (3, '2024-05-07 14:20:00', 'Entregue', 5),
 -- OS 4 (Entregue)
-(4, '2024-05-08 14:00:00', 'Aberto', 3), (4, '2024-05-08 16:30:00', 'Em Diagnostico', 9), (4, '2024-05-09 10:00:00', 'Em Execucao', 9),
+(4, '2024-05-08 16:30:00', 'Em Diagnostico', 9), (4, '2024-05-09 10:00:00', 'Em Execucao', 9),
 (4, '2024-05-09 17:15:00', 'Concluido', 9), (4, '2024-05-10 09:40:00', 'Entregue', 3),
 -- OS 5 (Entregue)
-(5, '2024-05-10 16:20:00', 'Aberto', 4), (5, '2024-05-11 09:00:00', 'Em Diagnostico', 10), (5, '2024-05-11 11:30:00', 'Em Execucao', 10),
+(5, '2024-05-11 09:00:00', 'Em Diagnostico', 10), (5, '2024-05-11 11:30:00', 'Em Execucao', 10),
 (5, '2024-05-11 16:45:00', 'Concluido', 10), (5, '2024-05-12 10:15:00', 'Entregue', 4),
 -- OS 6 (Entregue)
-(6, '2024-05-12 08:45:00', 'Aberto', 5), (6, '2024-05-12 10:00:00', 'Em Diagnostico', 6), (6, '2024-05-13 09:30:00', 'Em Execucao', 6),
+(6, '2024-05-12 10:00:00', 'Em Diagnostico', 6), (6, '2024-05-13 09:30:00', 'Em Execucao', 6),
 (6, '2024-05-13 14:00:00', 'Concluido', 6), (6, '2024-05-14 16:00:00', 'Entregue', 5),
 -- OS 7 a 10 (Entregues)
-(7, '2024-05-15 13:10:00', 'Aberto', 3), (7, '2024-05-16 09:00:00', 'Em Diagnostico', 7), (7, '2024-05-17 10:00:00', 'Concluido', 7), (7, '2024-05-18 11:30:00', 'Entregue', 3),
-(8, '2024-05-18 15:30:00', 'Aberto', 4), (8, '2024-05-19 10:00:00', 'Em Diagnostico', 8), (8, '2024-05-20 14:00:00', 'Concluido', 8), (8, '2024-05-21 09:00:00', 'Entregue', 4),
-(9, '2024-05-20 09:50:00', 'Aberto', 5), (9, '2024-05-21 08:30:00', 'Em Diagnostico', 9), (9, '2024-05-21 16:00:00', 'Concluido', 9), (9, '2024-05-22 10:00:00', 'Entregue', 5),
-(10, '2024-05-22 11:00:00', 'Aberto', 3), (10, '2024-05-23 09:00:00', 'Em Diagnostico', 10), (10, '2024-05-24 15:00:00', 'Concluido', 10), (10, '2024-05-25 14:00:00', 'Entregue', 3),
+(7, '2024-05-16 09:00:00', 'Em Diagnostico', 7), (7, '2024-05-17 10:00:00', 'Concluido', 7), (7, '2024-05-18 11:30:00', 'Entregue', 3),
+(8, '2024-05-19 10:00:00', 'Em Diagnostico', 8), (8, '2024-05-20 14:00:00', 'Concluido', 8), (8, '2024-05-21 09:00:00', 'Entregue', 4),
+(9, '2024-05-21 08:30:00', 'Em Diagnostico', 9), (9, '2024-05-21 16:00:00', 'Concluido', 9), (9, '2024-05-22 10:00:00', 'Entregue', 5),
+(10, '2024-05-23 09:00:00', 'Em Diagnostico', 10), (10, '2024-05-24 15:00:00', 'Concluido', 10), (10, '2024-05-25 14:00:00', 'Entregue', 3),
 -- OS 11 a 20 (Concluídas)
-(11, '2024-06-01 10:00:00', 'Aberto', 4), (11, '2024-06-01 14:00:00', 'Em Diagnostico', 6), (11, '2024-06-02 09:00:00', 'Em Execucao', 6), (11, '2024-06-03 11:00:00', 'Concluido', 6),
-(12, '2024-06-03 14:15:00', 'Aberto', 5), (12, '2024-06-04 08:30:00', 'Em Diagnostico', 7), (12, '2024-06-04 13:00:00', 'Em Execucao', 7), (12, '2024-06-05 10:00:00', 'Concluido', 7),
-(13, '2024-06-05 09:30:00', 'Aberto', 3), (13, '2024-06-06 10:00:00', 'Em Diagnostico', 8), (13, '2024-06-07 09:00:00', 'Em Execucao', 8), (13, '2024-06-08 14:00:00', 'Concluido', 8),
-(14, '2024-06-08 16:45:00', 'Aberto', 4), (14, '2024-06-09 09:00:00', 'Em Diagnostico', 9), (14, '2024-06-10 10:30:00', 'Em Execucao', 9), (14, '2024-06-11 11:00:00', 'Concluido', 9),
-(15, '2024-06-10 11:20:00', 'Aberto', 5), (15, '2024-06-10 15:00:00', 'Em Diagnostico', 10), (15, '2024-06-11 09:00:00', 'Em Execucao', 10), (15, '2024-06-12 09:30:00', 'Concluido', 10),
-(16, '2024-06-12 13:00:00', 'Aberto', 3), (16, '2024-06-13 09:00:00', 'Em Diagnostico', 6), (16, '2024-06-14 10:00:00', 'Em Execucao', 6), (16, '2024-06-15 12:00:00', 'Concluido', 6),
-(17, '2024-06-15 15:10:00', 'Aberto', 4), (17, '2024-06-16 08:30:00', 'Em Diagnostico', 7), (17, '2024-06-16 14:00:00', 'Em Execucao', 7), (17, '2024-06-17 15:00:00', 'Concluido', 7),
-(18, '2024-06-18 08:30:00', 'Aberto', 5), (18, '2024-06-18 11:00:00', 'Em Diagnostico', 8), (18, '2024-06-19 10:00:00', 'Em Execucao', 8), (18, '2024-06-20 16:30:00', 'Concluido', 8),
-(19, '2024-06-20 10:40:00', 'Aberto', 3), (19, '2024-06-21 09:00:00', 'Em Diagnostico', 9), (19, '2024-06-21 15:00:00', 'Em Execucao', 9), (19, '2024-06-22 11:30:00', 'Concluido', 9),
-(20, '2024-06-22 14:00:00', 'Aberto', 4), (20, '2024-06-23 09:00:00', 'Em Diagnostico', 10), (20, '2024-06-23 16:00:00', 'Em Execucao', 10), (20, '2024-06-24 10:00:00', 'Concluido', 10),
+(11, '2024-06-01 14:00:00', 'Em Diagnostico', 6), (11, '2024-06-02 09:00:00', 'Em Execucao', 6), (11, '2024-06-03 11:00:00', 'Concluido', 6),
+(12, '2024-06-04 08:30:00', 'Em Diagnostico', 7), (12, '2024-06-04 13:00:00', 'Em Execucao', 7), (12, '2024-06-05 10:00:00', 'Concluido', 7),
+(13, '2024-06-06 10:00:00', 'Em Diagnostico', 8), (13, '2024-06-07 09:00:00', 'Em Execucao', 8), (13, '2024-06-08 14:00:00', 'Concluido', 8),
+(14, '2024-06-09 09:00:00', 'Em Diagnostico', 9), (14, '2024-06-10 10:30:00', 'Em Execucao', 9), (14, '2024-06-11 11:00:00', 'Concluido', 9),
+(15, '2024-06-10 15:00:00', 'Em Diagnostico', 10), (15, '2024-06-11 09:00:00', 'Em Execucao', 10), (15, '2024-06-12 09:30:00', 'Concluido', 10),
+(16, '2024-06-13 09:00:00', 'Em Diagnostico', 6), (16, '2024-06-14 10:00:00', 'Em Execucao', 6), (16, '2024-06-15 12:00:00', 'Concluido', 6),
+(17, '2024-06-16 08:30:00', 'Em Diagnostico', 7), (17, '2024-06-16 14:00:00', 'Em Execucao', 7), (17, '2024-06-17 15:00:00', 'Concluido', 7),
+(18, '2024-06-18 11:00:00', 'Em Diagnostico', 8), (18, '2024-06-19 10:00:00', 'Em Execucao', 8), (18, '2024-06-20 16:30:00', 'Concluido', 8),
+(19, '2024-06-21 09:00:00', 'Em Diagnostico', 9), (19, '2024-06-21 15:00:00', 'Em Execucao', 9), (19, '2024-06-22 11:30:00', 'Concluido', 9),
+(20, '2024-06-23 09:00:00', 'Em Diagnostico', 10), (20, '2024-06-23 16:00:00', 'Em Execucao', 10), (20, '2024-06-24 10:00:00', 'Concluido', 10),
 -- OS 21 a 28 (Em Execução)
-(21, '2024-07-01 09:10:00', 'Aberto', 5), (21, '2024-07-01 14:00:00', 'Em Diagnostico', 6), (21, '2024-07-02 09:00:00', 'Em Execucao', 6),
-(22, '2024-07-02 11:30:00', 'Aberto', 3), (22, '2024-07-02 15:00:00', 'Em Diagnostico', 7), (22, '2024-07-03 10:00:00', 'Em Execucao', 7),
-(23, '2024-07-03 14:00:00', 'Aberto', 4), (23, '2024-07-04 09:00:00', 'Em Diagnostico', 8), (23, '2024-07-04 14:30:00', 'Em Execucao', 8),
-(24, '2024-07-04 16:15:00', 'Aberto', 5), (24, '2024-07-05 08:30:00', 'Em Diagnostico', 9), (24, '2024-07-05 11:00:00', 'Em Execucao', 9),
-(25, '2024-07-05 08:50:00', 'Aberto', 3), (25, '2024-07-05 13:00:00', 'Em Diagnostico', 10), (25, '2024-07-06 09:00:00', 'Em Execucao', 10),
-(26, '2024-07-06 10:20:00', 'Aberto', 4), (26, '2024-07-06 14:00:00', 'Em Diagnostico', 6), (26, '2024-07-07 10:00:00', 'Em Execucao', 6),
-(27, '2024-07-08 13:40:00', 'Aberto', 5), (27, '2024-07-09 09:00:00', 'Em Diagnostico', 7), (27, '2024-07-09 15:00:00', 'Em Execucao', 7),
-(28, '2024-07-09 15:00:00', 'Aberto', 3), (28, '2024-07-10 08:30:00', 'Em Diagnostico', 8), (28, '2024-07-10 11:30:00', 'Em Execucao', 8),
+(21, '2024-07-01 14:00:00', 'Em Diagnostico', 6), (21, '2024-07-02 09:00:00', 'Em Execucao', 6),
+(22, '2024-07-02 15:00:00', 'Em Diagnostico', 7), (22, '2024-07-03 10:00:00', 'Em Execucao', 7),
+(23, '2024-07-04 09:00:00', 'Em Diagnostico', 8), (23, '2024-07-04 14:30:00', 'Em Execucao', 8),
+(24, '2024-07-05 08:30:00', 'Em Diagnostico', 9), (24, '2024-07-05 11:00:00', 'Em Execucao', 9),
+(25, '2024-07-05 13:00:00', 'Em Diagnostico', 10), (25, '2024-07-06 09:00:00', 'Em Execucao', 10),
+(26, '2024-07-06 14:00:00', 'Em Diagnostico', 6), (26, '2024-07-07 10:00:00', 'Em Execucao', 6),
+(27, '2024-07-09 09:00:00', 'Em Diagnostico', 7), (27, '2024-07-09 15:00:00', 'Em Execucao', 7),
+(28, '2024-07-10 08:30:00', 'Em Diagnostico', 8), (28, '2024-07-10 11:30:00', 'Em Execucao', 8),
 -- OS 29 a 33 (Aguardando Peça)
-(29, '2024-07-10 09:00:00', 'Aberto', 4), (29, '2024-07-10 11:00:00', 'Em Diagnostico', 9), (29, '2024-07-11 09:30:00', 'Aguardando Peca', 9),
-(30, '2024-07-11 11:10:00', 'Aberto', 5), (30, '2024-07-11 15:00:00', 'Em Diagnostico', 10), (30, '2024-07-12 10:00:00', 'Aguardando Peca', 10),
-(31, '2024-07-12 14:30:00', 'Aberto', 3), (31, '2024-07-13 09:00:00', 'Em Diagnostico', 6), (31, '2024-07-13 14:00:00', 'Aguardando Peca', 6),
-(32, '2024-07-13 16:00:00', 'Aberto', 4), (32, '2024-07-14 10:00:00', 'Em Diagnostico', 7), (32, '2024-07-14 16:30:00', 'Aguardando Peca', 7),
-(33, '2024-07-15 08:30:00', 'Aberto', 5), (33, '2024-07-15 11:30:00', 'Em Diagnostico', 8), (33, '2024-07-16 09:00:00', 'Aguardando Peca', 8),
+(29, '2024-07-10 11:00:00', 'Em Diagnostico', 9), (29, '2024-07-11 09:30:00', 'Aguardando Peca', 9),
+(30, '2024-07-11 15:00:00', 'Em Diagnostico', 10), (30, '2024-07-12 10:00:00', 'Aguardando Peca', 10),
+(31, '2024-07-13 09:00:00', 'Em Diagnostico', 6), (31, '2024-07-13 14:00:00', 'Aguardando Peca', 6),
+(32, '2024-07-14 10:00:00', 'Em Diagnostico', 7), (32, '2024-07-14 16:30:00', 'Aguardando Peca', 7),
+(33, '2024-07-15 11:30:00', 'Em Diagnostico', 8), (33, '2024-07-16 09:00:00', 'Aguardando Peca', 8),
 -- OS 34 a 38 (Em Diagnóstico)
-(34, '2024-07-16 10:00:00', 'Aberto', 3), (34, '2024-07-16 14:00:00', 'Em Diagnostico', 9),
-(35, '2024-07-17 12:00:00', 'Aberto', 4), (35, '2024-07-17 15:30:00', 'Em Diagnostico', 10),
-(36, '2024-07-18 14:20:00', 'Aberto', 5), (36, '2024-07-19 09:00:00', 'Em Diagnostico', 6),
-(37, '2024-07-19 16:10:00', 'Aberto', 3), (37, '2024-07-20 08:30:00', 'Em Diagnostico', 7),
-(38, '2024-07-20 09:40:00', 'Aberto', 4), (38, '2024-07-20 11:00:00', 'Em Diagnostico', 8),
--- OS 39 a 42 (Aberto)
-(39, '2024-07-21 11:00:00', 'Aberto', 5),
-(40, '2024-07-21 13:30:00', 'Aberto', 3),
-(41, '2024-07-22 08:15:00', 'Aberto', 4),
-(42, '2024-07-22 10:00:00', 'Aberto', 5);
+(34, '2024-07-16 14:00:00', 'Em Diagnostico', 9),
+(35, '2024-07-17 15:30:00', 'Em Diagnostico', 10),
+(36, '2024-07-19 09:00:00', 'Em Diagnostico', 6),
+(37, '2024-07-20 08:30:00', 'Em Diagnostico', 7),
+(38, '2024-07-20 11:00:00', 'Em Diagnostico', 8);
+-- OS 39 a 42 (Aberto): nenhum evento extra; o evento 'Aberto' é gerado pela trigger de abertura da OS.
 
 -- ============================================================
 -- 9. POVOAMENTO DA TABELA POSSUI_SERVICO (60 registros)
@@ -333,9 +332,9 @@ INSERT INTO POSSUI_SERVICO (id_servico, id_os, quantidade, preco_praticado) VALU
 (9, 9, 1, 250.00),
 (1, 10, 1, 150.00),
 (4, 11, 1, 90.00), (8, 11, 1, 100.00),
-(6, 12, 1, 120.00),
-(8, 13, 1, 100.00),
-(3, 14, 1, 180.00),
+(6, 12, 1, 100.00),
+(8, 13, 1, 90.00),
+(3, 14, 1, 160.00),
 (2, 15, 1, 200.00),
 (6, 16, 1, 120.00),
 (7, 17, 1, 130.00),
@@ -343,7 +342,7 @@ INSERT INTO POSSUI_SERVICO (id_servico, id_os, quantidade, preco_praticado) VALU
 (2, 19, 1, 200.00),
 (1, 20, 1, 150.00),
 (3, 21, 1, 180.00), (8, 21, 1, 100.00),
-(5, 22, 1, 450.00),
+(5, 22, 1, 500.00),
 (6, 23, 1, 120.00),
 (8, 24, 1, 100.00),
 (3, 25, 1, 180.00),
