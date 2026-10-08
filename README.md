@@ -5,17 +5,19 @@ Projeto acadêmico desenvolvido para a disciplina de **Laboratório de Banco de 
 ## Tema e Escopo
 O SGATM é um banco de dados projetado para gerenciar as operações de uma oficina de assistência técnica e manutenção de equipamentos. O sistema controla o cadastro de clientes, colaboradores (técnicos e atendentes), ordens de serviço, serviços prestados, peças utilizadas e o histórico de status de cada atendimento.
 
-##  Integrantes da Equipe
-* **Michael Douglas Mendes Costa** - [michael.dcosta@a.ucb.br](mailto:michael.dcosta@a.ucb.br) | [@doouglas24](https://github.com/doouglas24)
-* **Maria Rosa Magalhães Brasileiro** - [maria.brasileiro@a.ucb.br](mailto:maria.brasileiro@a.ucb.br) | [@mariarosambrasileiro07](https://github.com/mariarosambrasileiro07)
-* **Lorena Dalmagro** - [lorena.videro@a.ucb.br](mailto:lorena.videro@a.ucb.br) | [@loredalmagro](https://github.com/loredalmagro)
-* **Miguel Araújo de Melo** - [miguel.amelo@a.ucb.br](mailto:email@a.ucb.br) | [@Miguel-arauujo](https://github.com/Miguel-arauujo)
-* **Mateus Elias Pereira Soares** - [mateus.esoares@a.ucb.br](mailto:mateus.esoares@a.ucb.br) | [@mateus04478](https://github.com/mateus04478)
+## Divisão de Papéis e Responsabilidades
+| Integrante | Papel no Projeto | Principais Contribuições |
+| :--- | :--- | :--- |
+| **Michael Douglas Mendes Costa** | Administrador do Banco (DBA) & Modelador Principal | Mapeamento dos modelos ER/Lógico, implementação dos scripts DDL (`01_ddl.sql`), carga de dados (`02_carga.sql`), consultas SQL (`03_consultas.sql`) e consolidação do relatório. |
+| **Maria Rosa Magalhães** | Analista de Domínio | Levantamento das regras de negócio (RN01 a RN20), documentação do escopo do sistema SGATM e auxílio no dicionário de dados. |
+| **Lorena Dalmagro** | Analista de Negócios e Documentação | Revisão textual do relatório, verificação de consistência entre escopo e dicionário, e preparação dos materiais para a apresentação oral. |
+| **Miguel Araújo de Melo** | Apoio de Modelagem e Testes | Auxílio na revisão dos diagramas conceituais/lógicos e testes de validação do script DDL e das consultas. |
+| **Mateus Elias Pereira Soares** | Apoio de Testes e Apresentação | Verificação das restrições do banco de dados, auxílio no roteiro de testes da carga de dados e suporte na montagem da apresentação oral. |
 
 ## Tecnologias Utilizadas
 * **SGBD:** MySQL 8.0+
 * **Codificação de Caracteres:** `utf8mb4`
-* **Ferramenta de Modelagem:** [Ex: MySQL Workbench / draw.io]
+* **Ferramentas de Modelagem:** draw.io e MySQL Workbench
 
 ## Estrutura do Repositório
 * `docs/`: Documentação textual, modelos conceituais/lógicos e dicionário de dados em PDF.
