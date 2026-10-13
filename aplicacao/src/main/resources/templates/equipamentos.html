@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SGATM - Gestão de Equipamentos</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9; color: #333; }
+        h1, h2 { color: #2c3e50; }
+        form { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 30px; max-width: 400px; }
+        div { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], select { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        button { background-color: #3498db; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #2980b9; }
+        table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #2c3e50; color: white; }
+        tr:hover { background-color: #f1f1f1; }
+    </style>
+</head>
+<body>
+
+    <h1>SGATM - Sistema de Gestão de Assistência Técnica</h1>
+    
+    <h2>Cadastrar Novo Equipamento</h2>
+    <form action="#" th:action="@{/equipamentos}" th:object="${equipamento}" method="post">
+        <div>
+            <label for="tipo">Tipo (ex: Notebook, Smartphone):</label>
+            <input type="text" id="tipo" th:field="*{tipo}" required />
+        </div>
+        <div>
+            <label for="modelo">Modelo:</label>
+            <input type="text" id="modelo" th:field="*{modelo}" required />
+        </div>
+        <div>
+            <label for="descricaoDefeito">Descrição do Defeito:</label>
+            <input type="text" id="descricaoDefeito" th:field="*{descricaoDefeito}" required />
+        </div>
+        <div>
+            <label for="cliente">Cliente Dono:</label>
+            <select id="cliente" th:field="*{cliente}" required>
+                <option value="">Selecione um cliente</option>
+                <option th:each="c : ${clientes}" th:value="${c.id}" th:text="${c.nome}"></option>
+            </select>
+        </div>
+        <button type="submit">Salvar Equipamento</button>
+    </form>
+
+    <h2>Lista de Equipamentos Registados</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tipo</th>
+                <th>Modelo</th>
+                <th>Defeito</th>
+                <th>Cliente</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${#lists.isEmpty(equipamentos)}">
+                <td colspan="6" style="text-align: center;">Nenhum equipamento cadastrado ainda.</td>
+            </tr>
+            <tr th:each="e : ${equipamentos}">
+                <td th:text="${e.id}"></td>
+                <td th:text="${e.tipo}"></td>
+                <td th:text="${e.modelo}"></td>
+                <td th:text="${e.descricaoDefeito}"></td>
+                <td th:text="${e.cliente != null ? e.cliente.nome : 'Sem Cliente'}"></td>
+                <td>
+                    <a th:href="@{/equipamentos/deletar/{id}(id=${e.id})}" 
+                       style="color: white; background-color: #e74c3c; padding: 6px 10px; text-decoration: none; border-radius: 4px;"
+                       onclick="return confirm('Tens a certeza que desejas apagar este equipamento?');">
+                       Eliminar
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <a href="/clientes" style="color: #3498db; text-decoration: none; font-weight: bold;">← Voltar para Gestão de Clientes</a>
+
+</body>
+</html>
