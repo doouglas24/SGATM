@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <title>SGATM - Gestão de Equipamentos</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9; color: #333; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f6f9; color: #333; }
+        .container { max-width: 1000px; margin: 40px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         h1, h2 { color: #2c3e50; }
-        form { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 30px; max-width: 400px; }
+        form { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-bottom: 30px; max-width: 400px; border: 1px solid #e2e8f0; }
         div { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; font-weight: bold; }
         input[type="text"], select { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
         button { background-color: #3498db; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
         button:hover { background-color: #2980b9; }
-        table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
         th { background-color: #2c3e50; color: white; }
         tr:hover { background-color: #f1f1f1; }
@@ -20,67 +21,91 @@
 </head>
 <body>
 
-    <h1>SGATM - Sistema de Gestão de Assistência Técnica</h1>
-    
-    <h2>Cadastrar Novo Equipamento</h2>
-    <form action="#" th:action="@{/equipamentos}" th:object="${equipamento}" method="post">
+    <!-- Barra de Navegação -->
+    <nav style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 14px 35px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 1000;">
         <div>
-            <label for="tipo">Tipo (ex: Notebook, Smartphone):</label>
-            <input type="text" id="tipo" th:field="*{tipo}" required />
+            <a th:href="@{/}" style="color: #ffffff; text-decoration: none; font-weight: 700; font-size: 17px; display: flex; align-items: center; gap: 10px;">
+                <div style="background: rgba(56, 189, 248, 0.15); padding: 6px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                SGATM <span style="font-weight: 300; color: #94a3b8; font-size: 14px; margin-left: 2px;">| Início</span>
+            </a>
         </div>
-        <div>
-            <label for="modelo">Modelo:</label>
-            <input type="text" id="modelo" th:field="*{modelo}" required />
+        <div style="display: flex; gap: 12px; align-items: center;">
+            <a th:href="@{/clientes}" th:style="${paginaAtiva == 'clientes'} ? 'background-color: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 8px 14px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px;' : 'color: #cbd5e1; padding: 8px 14px; border-radius: 6px; text-decoration: none; font-size: 14px;'">Clientes</a>
+            <a th:href="@{/equipamentos}" th:style="${paginaAtiva == 'equipamentos'} ? 'background-color: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 8px 14px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px;' : 'color: #cbd5e1; padding: 8px 14px; border-radius: 6px; text-decoration: none; font-size: 14px;'">Equipamentos</a>
+            <a th:href="@{/ordens}" th:style="${paginaAtiva == 'ordens'} ? 'background-color: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 8px 14px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px;' : 'color: #cbd5e1; padding: 8px 14px; border-radius: 6px; text-decoration: none; font-size: 14px;'">Ordens de Serviço</a>
+            <a th:href="@{/ordens/relatorio}" th:style="${paginaAtiva == 'relatorios'} ? 'background-color: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 8px 14px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px;' : 'color: #cbd5e1; padding: 8px 14px; border-radius: 6px; text-decoration: none; font-size: 14px;'">Relatórios</a>
         </div>
-        <div>
-            <label for="descricaoDefeito">Descrição do Defeito:</label>
-            <input type="text" id="descricaoDefeito" th:field="*{descricaoDefeito}" required />
-        </div>
-        <div>
-            <label for="cliente">Cliente Dono:</label>
-            <select id="cliente" th:field="*{cliente}" required>
-                <option value="">Selecione um cliente</option>
-                <option th:each="c : ${clientes}" th:value="${c.id}" th:text="${c.nome}"></option>
-            </select>
-        </div>
-        <button type="submit">Salvar Equipamento</button>
-    </form>
+    </nav>
 
-    <h2>Lista de Equipamentos Registados</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Tipo</th>
-                <th>Modelo</th>
-                <th>Defeito</th>
-                <th>Cliente</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:if="${#lists.isEmpty(equipamentos)}">
-                <td colspan="6" style="text-align: center;">Nenhum equipamento cadastrado ainda.</td>
-            </tr>
-            <tr th:each="e : ${equipamentos}">
-                <td th:text="${e.id}"></td>
-                <td th:text="${e.tipo}"></td>
-                <td th:text="${e.modelo}"></td>
-                <td th:text="${e.descricaoDefeito}"></td>
-                <td th:text="${e.cliente != null ? e.cliente.nome : 'Sem Cliente'}"></td>
-                <td>
-                    <a th:href="@{/equipamentos/deletar/{id}(id=${e.id})}" 
-                       style="color: white; background-color: #e74c3c; padding: 6px 10px; text-decoration: none; border-radius: 4px;"
-                       onclick="return confirm('Tens a certeza que desejas apagar este equipamento?');">
-                       Eliminar
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container">
+        <div th:if="${mensagemSucesso}" style="background-color: #d1e7dd; color: #0f5132; padding: 12px; border-radius: 6px; margin-bottom: 20px; font-weight: 500;">
+            <p th:text="${mensagemSucesso}" style="margin: 0;"></p>
+        </div>
+        <div th:if="${mensagemErro}" style="background-color: #f8d7da; color: #842029; padding: 12px; border-radius: 6px; margin-bottom: 20px; font-weight: 500;">
+            <p th:text="${mensagemErro}" style="margin: 0;"></p>
+        </div>
 
-    <br>
-    <a href="/clientes" style="color: #3498db; text-decoration: none; font-weight: bold;">← Voltar para Gestão de Clientes</a>
+        <h1>SGATM - Sistema de Gestão de Assistência Técnica</h1>
+        
+        <h2>Cadastrar Novo Equipamento</h2>
+        <form action="#" th:action="@{/equipamentos}" th:object="${equipamento}" method="post">
+            <div>
+                <label for="tipo">Tipo (ex: Notebook, Smartphone):</label>
+                <input type="text" id="tipo" th:field="*{tipo}" required />
+            </div>
+            <div>
+                <label for="modelo">Modelo:</label>
+                <input type="text" id="modelo" th:field="*{modelo}" required />
+            </div>
+            <div>
+                <label for="descricaoDefeito">Descrição do Defeito:</label>
+                <input type="text" id="descricaoDefeito" th:field="*{descricaoDefeito}" required />
+            </div>
+            <div>
+                <label for="cliente">Cliente Dono:</label>
+                <select id="cliente" th:field="*{cliente}" required>
+                    <option value="">Selecione um cliente</option>
+                    <option th:each="c : ${clientes}" th:value="${c.id}" th:text="${c.nome}"></option>
+                </select>
+            </div>
+            <button type="submit">Salvar Equipamento</button>
+        </form>
+
+        <h2>Lista de Equipamentos Registados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tipo</th>
+                    <th>Modelo</th>
+                    <th>Defeito</th>
+                    <th>Cliente</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${#lists.isEmpty(equipamentos)}">
+                    <td colspan="6" style="text-align: center;">Nenhum equipamento cadastrado ainda.</td>
+                </tr>
+                <tr th:each="e : ${equipamentos}">
+                    <td th:text="${e.id}"></td>
+                    <td th:text="${e.tipo}"></td>
+                    <td th:text="${e.modelo}"></td>
+                    <td th:text="${e.descricaoDefeito}"></td>
+                    <td th:text="${e.cliente != null ? e.cliente.nome : 'Sem Cliente'}"></td>
+                    <td>
+                        <a th:href="@{/equipamentos/deletar/{id}(id=${e.id})}" 
+                           style="color: white; background-color: #e74c3c; padding: 6px 10px; text-decoration: none; border-radius: 4px;"
+                           onclick="return confirm('Tens a certeza que desejas apagar este equipamento?');">
+                           Eliminar
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 </body>
 </html>

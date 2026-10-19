@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class EquipamentoController {
@@ -34,9 +35,15 @@ public class EquipamentoController {
         return "redirect:/equipamentos";
     }
 
+    // Método único de deletar com tratamento de erro
     @GetMapping("/equipamentos/deletar/{id}")
-    public String deletarEquipamento(@PathVariable Long id) {
-        equipamentoRepository.deleteById(id);
+    public String deletarEquipamento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+        try {
+            equipamentoRepository.deleteById(id);
+            redirectAttributes.addFlashAttribute("mensagemSucesso", "Equipamento removido com sucesso!");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("mensagemErro", "Não é possível apagar este equipamento pois ele possui Ordens de Serviço vinculadas.");
+        }
         return "redirect:/equipamentos";
     }
 }
