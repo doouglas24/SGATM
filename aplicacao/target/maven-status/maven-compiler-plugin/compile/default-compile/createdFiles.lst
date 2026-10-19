@@ -1,0 +1,15 @@
+com/sgatm_db/aplicacao/controller/EquipamentoController.class
+com/sgatm_db/aplicacao/AplicacaoApplication.class
+com/sgatm_db/aplicacao/repository/EquipamentoRepository.class
+com/sgatm_db/aplicacao/repository/OrdemServicoRepository.class
+com/sgatm_db/aplicacao/model/Equipamento.class
+com/sgatm_db/aplicacao/controller/ClienteController.class
+com/sgatm_db/aplicacao/services/OrdemServicoService.class
+com/sgatm_db/aplicacao/model/OrdemServico.class
+com/sgatm_db/aplicacao/controller/HomeController.class
+com/sgatm_db/aplicacao/controller/LoginController.class
+com/sgatm_db/aplicacao/controller/OrdemServicoController.class
+com/sgatm_db/aplicacao/repository/FuncionarioRepository.class
+com/sgatm_db/aplicacao/model/Funcionario.class
+com/sgatm_db/aplicacao/repository/ClienteRepository.class
+com/sgatm_db/aplicacao/model/Cliente.class

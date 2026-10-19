@@ -1,0 +1,15 @@
+/home/michael/SGATM/aplicacao/src/main/java/com/sgatm/aplicacao/AplicacaoApplication.java
+/home/michael/SGATM/aplicacao/src/main/java/com/sgatm/aplicacao/controller/ClienteController.java
+/home/michael/SGATM/aplicacao/src/main/java/com/sgatm/aplicacao/controller/EquipamentoController.java
+/home/michael/SGATM/aplicacao/src/main/java/com/sgatm/aplicacao/controller/HomeController.java
+/home/michael/SGATM/aplicacao/src/main/java/com/sgatm/aplicacao/controller/LoginController.java
+/home/michael/SGATM/aplicacao/src/main/java/com/sgatm/aplicacao/controller/OrdemServicoController.java
+/home/michael/SGATM/aplicacao/src/main/java/com/sgatm/aplicacao/model/Cliente.java
+/home/michael/SGATM/aplicacao/src/main/java/com/sgatm/aplicacao/model/Equipamento.java
+/home/michael/SGATM/aplicacao/src/main/java/com/sgatm/aplicacao/model/Funcionario.java
+/home/michael/SGATM/aplicacao/src/main/java/com/sgatm/aplicacao/model/OrdemServico.java
+/home/michael/SGATM/aplicacao/src/main/java/com/sgatm/aplicacao/repository/ClienteRepository.java
+/home/michael/SGATM/aplicacao/src/main/java/com/sgatm/aplicacao/repository/EquipamentoRepository.java
+/home/michael/SGATM/aplicacao/src/main/java/com/sgatm/aplicacao/repository/FuncionarioRepository.java
+/home/michael/SGATM/aplicacao/src/main/java/com/sgatm/aplicacao/repository/OrdemServicoRepository.java
+/home/michael/SGATM/aplicacao/src/main/java/com/sgatm/aplicacao/services/OrdemServicoService.java

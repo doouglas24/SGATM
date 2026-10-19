@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SGATM - Início</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f6f9; margin: 0; padding: 0; }
+        .container { max-width: 500px; margin: 100px auto; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center; }
+        h2 { color: #2c3e50; margin-bottom: 10px; }
+        p { color: #7f8c8d; margin-bottom: 30px; }
+        .btn { display: block; width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 5px; text-decoration: none; color: white; font-weight: bold; font-size: 15px; transition: background 0.2s; }
+        .btn-clientes { background-color: #3498db; }
+        .btn-clientes:hover { background-color: #2980b9; }
+        .btn-equipamentos { background-color: #2ecc71; }
+        .btn-equipamentos:hover { background-color: #27ae60; }
+        .btn-ordens { background-color: #e67e22; }
+        .btn-ordens:hover { background-color: #d35400; }
+        .btn-relatorios { background-color: #8e44ad; }
+        .btn-relatorios:hover { background-color: #732d91; }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de Navegação Superior -->
+    <nav style="background-color: #1e293b; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <div>
+            <a th:href="@{/}" style="color: white; text-decoration: none; font-weight: bold; font-size: 18px;">SGATM - Início</a>
+        </div>
+        <div style="display: flex; gap: 20px;">
+            <a th:href="@{/clientes}" style="color: #94a3b8; text-decoration: none; font-size: 15px;">Clientes</a>
+            <a th:href="@{/equipamentos}" style="color: #94a3b8; text-decoration: none; font-size: 15px;">Equipamentos</a>
+            <a th:href="@{/ordens}" style="color: #94a3b8; text-decoration: none; font-size: 15px;">Ordens de Serviço</a>
+            <a th:href="@{/ordens/relatorio}" style="color: #94a3b8; text-decoration: none; font-size: 15px;">Relatórios</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>SGATM</h2>
+        <p>Sistema de Gestão de Assistência Técnica e Manutenção</p>
+
+        <a th:href="@{/clientes}" class="btn btn-clientes">Gerir Clientes</a>
+        <a th:href="@{/equipamentos}" class="btn btn-equipamentos">Gerir Equipamentos</a>
+        <a th:href="@{/ordens}" class="btn btn-ordens">Gerir Ordens de Serviço</a>
+        <a th:href="@{/ordens/relatorio}" class="btn btn-relatorios">Consultas e Relatórios (B1)</a>
+    </div>
+
+</body>
+</html>

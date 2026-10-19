@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SGATM - Relatório de Ordens de Serviço</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f6f9; margin: 0; padding: 0; }
+        .container { max-width: 1000px; margin: 40px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        h2 { color: #2c3e50; margin-bottom: 20px; }
+        form { margin-bottom: 25px; display: flex; gap: 15px; align-items: center; }
+        select, button { padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-size: 14px; }
+        button { background-color: #2980b9; color: white; border: none; cursor: pointer; font-weight: bold; }
+        button:hover { background-color: #3498db; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #2c3e50; color: white; }
+        tr:hover { background-color: #f1f1f1; }
+        .btn-voltar { display: inline-block; margin-top: 20px; text-decoration: none; color: #2980b9; font-weight: bold; }
+
+        
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- Barra de Navegação Superior -->
+<!-- Barra de Navegação Padrão SGATM -->
+<nav style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 14px 35px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.15); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: sticky; top: 0; z-index: 1000;">
+    <!-- Logo / Início -->
+    <div>
+        <a th:href="@{/}" style="color: #ffffff; text-decoration: none; font-weight: 700; font-size: 17px; display: flex; align-items: center; gap: 10px; transition: opacity 0.2s ease;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+            <div style="background: rgba(56, 189, 248, 0.15); padding: 6px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            SGATM <span style="font-weight: 300; color: #94a3b8; font-size: 14px; margin-left: 2px;">| Início</span>
+        </a>
+    </div>
+
+    <!-- Links de Navegação -->
+    <div style="display: flex; gap: 12px; align-items: center;">
+        
+        <!-- Clientes -->
+        <a th:href="@{/clientes}" 
+           th:style="${paginaAtiva == 'clientes'} ? 'background-color: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 8px 14px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 6px;' : 'color: #cbd5e1; padding: 8px 14px; border-radius: 6px; text-decoration: none; font-weight: 500; font-size: 14px; display: flex; align-items: center; gap: 6px; transition: background 0.2s, color 0.2s;'"
+           onmouseover="if(this.style.backgroundColor=='') {this.style.backgroundColor='rgba(255,255,255,0.05)'; this.style.color='#ffffff';}" 
+           onmouseout="if(this.style.backgroundColor!='rgba(56, 189, 248, 0.15)') {this.style.backgroundColor='transparent'; this.style.color='#cbd5e1';}">
+           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+           Clientes
+        </a>
+
+        <!-- Equipamentos -->
+        <a th:href="@{/equipamentos}" 
+           th:style="${paginaAtiva == 'equipamentos'} ? 'background-color: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 8px 14px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 6px;' : 'color: #cbd5e1; padding: 8px 14px; border-radius: 6px; text-decoration: none; font-weight: 500; font-size: 14px; display: flex; align-items: center; gap: 6px; transition: background 0.2s, color 0.2s;'"
+           onmouseover="if(this.style.backgroundColor=='') {this.style.backgroundColor='rgba(255,255,255,0.05)'; this.style.color='#ffffff';}" 
+           onmouseout="if(this.style.backgroundColor!='rgba(56, 189, 248, 0.15)') {this.style.backgroundColor='transparent'; this.style.color='#cbd5e1';}">
+           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+           Equipamentos
+        </a>
+
+        <!-- Ordens de Serviço -->
+        <a th:href="@{/ordens}" 
+           th:style="${paginaAtiva == 'ordens'} ? 'background-color: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 8px 14px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 6px;' : 'color: #cbd5e1; padding: 8px 14px; border-radius: 6px; text-decoration: none; font-weight: 500; font-size: 14px; display: flex; align-items: center; gap: 6px; transition: background 0.2s, color 0.2s;'"
+           onmouseover="if(this.style.backgroundColor=='') {this.style.backgroundColor='rgba(255,255,255,0.05)'; this.style.color='#ffffff';}" 
+           onmouseout="if(this.style.backgroundColor!='rgba(56, 189, 248, 0.15)') {this.style.backgroundColor='transparent'; this.style.color='#cbd5e1';}">
+           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+           Ordens de Serviço
+        </a>
+
+        <!-- Relatórios -->
+        <a th:href="@{/ordens/relatorio}" 
+           th:style="${paginaAtiva == 'relatorios'} ? 'background-color: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 8px 14px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 6px;' : 'color: #cbd5e1; padding: 8px 14px; border-radius: 6px; text-decoration: none; font-weight: 500; font-size: 14px; display: flex; align-items: center; gap: 6px; transition: background 0.2s, color 0.2s;'"
+           onmouseover="if(this.style.backgroundColor=='') {this.style.backgroundColor='rgba(255,255,255,0.05)'; this.style.color='#ffffff';}" 
+           onmouseout="if(this.style.backgroundColor!='rgba(56, 189, 248, 0.15)') {this.style.backgroundColor='transparent'; this.style.color='#cbd5e1';}">
+           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+           Relatórios
+        </a>
+
+    </div>
+</nav>
+
+    <div class="container">
+        <h2>Relatório de Ordens de Serviço (Consulta Parametrizada)</h2>
+
+        <!-- Formulário de Filtro por Status -->
+        <!-- Formulário de Filtro por Status -->
+        <form th:action="@{/ordens/relatorio}" method="get">
+            <label for="status">Filtrar por Status:</label>
+            <select name="status" id="status">
+                <option value="">Todos os Status</option>
+                <option value="Aberta" th:selected="${statusSelecionado == 'Aberta'}">Aberta</option>
+                <option value="Em Andamento" th:selected="${statusSelecionado == 'Em Andamento'}">Em Andamento</option>
+                <option value="Concluída" th:selected="${statusSelecionado == 'Concluída'}">Concluída</option>
+                <option value="Entregue" th:selected="${statusSelecionado == 'Entregue'}">Entregue</option>
+            </select>
+            <button type="submit">Filtrar Relatório</button>
+        </form>
+
+        <!-- Tabela de Resultados -->
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Defeito Relatado</th>
+                    <th>Status</th>
+                    <th>Cliente</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="os : ${ordens}">
+                    <td th:text="${os.id}"></td> <!-- Mudei de idOs para id -->
+                    <td th:text="${os.descricaoServico}"></td>
+                    <td th:text="${os.status}"></td>
+                    <td th:text="${os.cliente != null ? os.cliente.nome : 'N/A'}"></td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(ordens)}">
+                    <td colspan="4" style="text-align: center; color: #7f8c8d;">Nenhuma ordem de serviço encontrada para este filtro.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a th:href="@{/ordens}" class="btn-voltar">← Voltar para Gestão de Ordens de Serviço</a>
+    </div>
+
+</body>
+</html>
