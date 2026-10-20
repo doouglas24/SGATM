@@ -16,14 +16,31 @@
         th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
         th { background-color: #2c3e50; color: white; }
         tr:hover { background-color: #f1f1f1; }
+        .btn-warning { background-color: #f39c12; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px; }
+        .btn-danger { background-color: #e74c3c; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px; }
     </style>
 </head>
 <body>
 
+    <!-- Cabeçalho de controlo de sessão e utilizador logado -->
+    <div style="float: right;" th:if="${session.cargoUsuario != null}">
+        <span>Utilizador: <strong th:text="${session.nomeUsuario}">Perfil</strong> (<span th:text="${session.cargoUsuario}">Cargo</span>)</span> | 
+        <a href="/logout">Terminar Sessão</a>
+    </div>
+
     <h1>SGATM - Sistema de Gestão de Assistência Técnica</h1>
     
+    <p>
+        <a href="/" class="btn" style="background-color: #7f8c8d; text-decoration: none; padding: 5px 10px; color: white; border-radius: 4px;">Voltar ao Painel Inicial</a> | 
+        <a href="/clientes" style="color: #3498db; text-decoration: none; font-weight: bold;">Gerir Clientes</a>
+    </p>
+    
     <h2>Cadastrar Novo Equipamento</h2>
+    
     <form action="#" th:action="@{/equipamentos}" th:object="${equipamento}" method="post">
+        <!-- Campo oculto essencial para suportar atualizações/edições -->
+        <input type="hidden" th:field="*{id}" />
+
         <div>
             <label for="tipo">Tipo (ex: Notebook, Smartphone):</label>
             <input type="text" id="tipo" th:field="*{tipo}" required />
@@ -63,14 +80,14 @@
                 <td colspan="6" style="text-align: center;">Nenhum equipamento cadastrado ainda.</td>
             </tr>
             <tr th:each="e : ${equipamentos}">
-                <td th:text="${e.id}"></td>
-                <td th:text="${e.tipo}"></td>
-                <td th:text="${e.modelo}"></td>
-                <td th:text="${e.descricaoDefeito}"></td>
-                <td th:text="${e.cliente != null ? e.cliente.nome : 'Sem Cliente'}"></td>
+                <td th:text="${e.id}">1</td>
+                <td th:text="${e.tipo}">Tipo</td>
+                <td th:text="${e.modelo}">Modelo</td>
+                <td th:text="${e.descricaoDefeito}">Defeito</td>
+                <td th:text="${e.cliente != null ? e.cliente.nome : 'Sem Cliente'}">Cliente</td>
                 <td>
-                    <a th:href="@{/equipamentos/deletar/{id}(id=${e.id})}" 
-                       style="color: white; background-color: #e74c3c; padding: 6px 10px; text-decoration: none; border-radius: 4px;"
+                    <a th:href="@{/equipamentos/editar/{id}(id=${e.id})}" class="btn-warning">Editar</a>
+                    <a th:href="@{/equipamentos/deletar/{id}(id=${e.id})}" class="btn-danger" 
                        onclick="return confirm('Tens a certeza que desejas apagar este equipamento?');">
                        Eliminar
                     </a>
@@ -78,9 +95,6 @@
             </tr>
         </tbody>
     </table>
-
-    <br>
-    <a href="/clientes" style="color: #3498db; text-decoration: none; font-weight: bold;">← Voltar para Gestão de Clientes</a>
 
 </body>
 </html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SGATM - Relatório de Ordens de Serviço</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9; color: #333; }
+        h1, h2 { color: #2c3e50; }
+        .filter-form { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; display: flex; gap: 10px; align-items: center; max-width: 500px; }
+        select, button { padding: 8px; border-radius: 4px; border: 1px solid #ccc; }
+        button { background-color: #9b59b6; color: white; border: none; font-weight: bold; cursor: pointer; }
+        button:hover { background-color: #8e44ad; }
+        table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #2c3e50; color: white; }
+        tr:hover { background-color: #f1f1f1; }
+        .nav-link { display: inline-block; margin-top: 20px; color: #3498db; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div style="float: right;" th:if="${session.cargoUsuario != null}">
+        <span>Utilizador: <strong th:text="${session.nomeUsuario}">Perfil</strong> (<span th:text="${session.cargoUsuario}">Cargo</span>)</span> | 
+        <a href="/logout" style="color: #e74c3c; text-decoration: none; font-weight: bold;">Sair</a>
+    </div>
+
+    <h1>SGATM - Relatório de Ordens de Serviço</h1>
+
+    <!-- Formulário de Filtro por Status -->
+    <form method="get" action="/relatorio" class="filter-form">
+        <label for="status">Filtrar por Status:</label>
+        <select name="status" id="status">
+            <option value="">Todos</option>
+            <option value="Aberta" th:selected="${statusSelecionado == 'Aberta'}">Aberta</option>
+            <option value="Em Andamento" th:selected="${statusSelecionado == 'Em Andamento'}">Em Andamento</option>
+            <option value="Concluída" th:selected="${statusSelecionado == 'Concluída'}">Concluída</option>
+            <option value="Entregue" th:selected="${statusSelecionado == 'Entregue'}">Entregue</option>
+            <option value="Cancelada" th:selected="${statusSelecionado == 'Cancelada'}">Cancelada</option>
+        </select>
+        <button type="submit">Filtrar</button>
+    </form>
+
+    <h2>Listagem de Ordens</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Equipamento</th>
+                <th>Serviço / Solução</th>
+                <th>Valor (R$)</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${#lists.isEmpty(ordens)}">
+                <td colspan="6" style="text-align: center;">Nenhuma ordem encontrada para este filtro.</td>
+            </tr>
+            <tr th:each="os : ${ordens}">
+                <td th:text="${os.id}">1</td>
+                <td th:text="${os.cliente != null ? os.cliente.nome : 'N/A'}">Cliente</td>
+                <td th:text="${os.equipamento != null ? os.equipamento.tipo + ' (' + os.equipamento.modelo + ')' : 'N/A'}">Equipamento</td>
+                <td th:text="${os.descricaoServico}">Serviço</td>
+                <td th:text="${os.valor}">0.00</td>
+                <td th:text="${os.status}">Aberta</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="/" class="nav-link">← Voltar para a Página Inicial</a>
+
+</body>
+</html>

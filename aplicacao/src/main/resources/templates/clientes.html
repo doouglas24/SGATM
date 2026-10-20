@@ -16,62 +16,74 @@
         th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
         th { background-color: #2c3e50; color: white; }
         tr:hover { background-color: #f1f1f1; }
+        .btn-warning { background-color: #f39c12; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px; }
+        .btn-danger { background-color: #e74c3c; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px; }
     </style>
 </head>
 <body>
 
+    <!-- Menu rápido ou indicador de utilizador logado com controlo de perfil (RBAC) -->
+    <div style="float: right;" th:if="${session.cargoUsuario != null}">
+        <span>Utilizador: <strong th:text="${session.nomeUsuario}">Perfil</strong> (<span th:text="${session.cargoUsuario}">Cargo</span>)</span> | 
+        <a href="/logout">Terminar Sessão</a>
+    </div>
+
     <h1>SGATM - Sistema de Gestão de Assistência Técnica</h1>
+    <p><a href="/" class="btn" style="background-color: #7f8c8d; text-decoration: none; padding: 5px 10px; color: white; border-radius: 4px;">Voltar ao Painel Inicial</a></p>
     
     <h2>Cadastrar Novo Cliente</h2>
-    <form action="#" th:action="@{/clientes}" th:object="${cliente}" method="post">
-    <!-- Campo oculto para garantir que o Spring sabe que é uma atualização se o ID existir -->
-    <input type="hidden" th:field="*{id}" />
     
-    <div>
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" th:field="*{nome}" required />
-    </div>
-    <div class="form-group">
-        <label for="cpf">CPF:</label>
-        <input type="text" id="cpf" name="cpf" th:field="*{cpf}" maxlength="11" placeholder="Apenas números" required />
-    </div>
-    <div>
-        <label for="telefone">Telefone:</label>
-        <input type="text" id="telefone" th:field="*{telefone}" required />
-    </div>
-    <div>
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" th:field="*{email}" required />
-    </div>
-    <button type="submit">Salvar Cliente</button>
-</form>
+    <!-- O Thymeleaf faz o mapeamento do objeto cliente e da rota POST -->
+    <form action="#" th:action="@{/clientes}" th:object="${cliente}" method="post">
+        <!-- Campo oculto para suportar atualização caso o ID exista -->
+        <input type="hidden" th:field="*{id}" />
+        
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" th:field="*{nome}" required />
+        </div>
+        <div class="form-group">
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" th:field="*{cpf}" maxlength="11" placeholder="Apenas números" required />
+        </div>
+        <div>
+            <label for="telefone">Telefone:</label>
+            <input type="text" id="telefone" th:field="*{telefone}" required />
+        </div>
+        <div>
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" th:field="*{email}" required />
+        </div>
+        <button type="submit">Salvar Cliente</button>
+    </form>
 
     <h2>Lista de Clientes Registados</h2>
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>CPF</th>
-        <th>Telefone</th>
-        <th>E-mail</th>
-        <th>Ações</th>
-    </tr>
-</thead>
-<tbody>
-    <tr th:each="c : ${clientes}">
-        <td th:text="${c.id}"></td>
-        <td th:text="${c.nome}"></td>
-        <td th:text="${c.cpf}"></td>
-        <td th:text="${c.telefone}"></td>
-        <td th:text="${c.email}"></td>
-        <td>
-            <a th:href="@{/clientes/editar/{id}(id=${c.id})}" class="btn btn-warning">Editar</a>
-            <a th:href="@{/clientes/deletar/{id}(id=${c.id})}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja apagar?');">Eliminar</a>
-        </td>
-    </tr>
-</tbody>
-</table>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Telefone</th>
+                <th>E-mail</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iteração dinâmica da lista de clientes vindas do Model do Spring -->
+            <tr th:each="c : ${clientes}">
+                <td th:text="${c.id}">1</td>
+                <td th:text="${c.nome}">Nome Exemplo</td>
+                <td th:text="${c.cpf}">00000000000</td>
+                <td th:text="${c.telefone}">(61) 90000-0000</td>
+                <td th:text="${c.email}">exemplo@email.com</td>
+                <td>
+                    <a th:href="@{/clientes/editar/{id}(id=${c.id})}" class="btn-warning">Editar</a>
+                    <a th:href="@{/clientes/deletar/{id}(id=${c.id})}" class="btn-danger" onclick="return confirm('Tem certeza que deseja apagar?');">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
 </body>
 </html>

@@ -5,7 +5,7 @@
     <title>SGATM - Login de Funcionário</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #f4f4f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .login-box { background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 350px; text-align: center; }
+        .login-box { background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 380px; text-align: center; }
         h2 { color: #2c3e50; margin-bottom: 20px; }
         .input-group { margin-bottom: 15px; text-align: left; }
         label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; }
@@ -13,6 +13,7 @@
         button { background-color: #3498db; color: white; border: none; padding: 10px; width: 100%; border-radius: 4px; font-weight: bold; cursor: pointer; }
         button:hover { background-color: #2980b9; }
         .error { color: #e74c3c; margin-bottom: 15px; font-size: 14px; }
+        .hint { margin-top: 20px; font-size: 12px; color: #7f8c8d; text-align: left; background: #f8f9fa; padding: 10px; border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -20,12 +21,13 @@
     <div class="login-box">
         <h2>SGATM - Acesso Restrito</h2>
         
+        <!-- Exibição de mensagem de erro dinâmica vinda do LoginController -->
         <div th:if="${erro}" class="error" th:text="${erro}"></div>
 
         <form th:action="@{/login}" method="post">
             <div class="input-group">
-                <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email" required />
+                <label for="email">Código (ID) ou Login:</label>
+                <input type="text" id="email" name="email" required autocomplete="off" />
             </div>
             <div class="input-group">
                 <label for="senha">Palavra-passe:</label>
@@ -33,6 +35,15 @@
             </div>
             <button type="submit">Entrar</button>
         </form>
+
+        <!-- Dica de ajuda com as credenciais padrão dos perfis -->
+        <div class="hint">
+            <strong>Perfis de Acesso:</strong><br>
+            • ID 1: Gerente (Gerente@2026)<br>
+            • ID 2: Atendente (Atende@2026)<br>
+            • ID 3: Técnico (Tecnico@2026)<br>
+            • ID 4: Outro Setor (Outro@2026)
+        </div>
     </div>
 
 </body>
